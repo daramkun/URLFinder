@@ -9,14 +9,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using URLFinder.Finders;
 using URLFinder.Properties;
 
 namespace URLFinder
 {
 	public partial class MainForm : Form
 	{
+		ExcelFinder finder;
+
 		public MainForm ()
 		{
 			InitializeComponent ();
@@ -27,24 +31,41 @@ namespace URLFinder
 
 		private void MainForm_FormClosed ( object sender, FormClosedEventArgs e )
 		{
+			if ( finder != null )
+			{
+				finder.Dispose ();
+				finder = null;
+			}
+
 			Settings.Default.finding_paths = textBoxFindingPaths.Text;
 			Settings.Default.finding_file_patterns = textBoxFilePatterns.Text;
 			Settings.Default.Save ();
 		}
 
-		private void Log ( string message, Color backColor )
+		private ListViewItem Log ( string message, Color backColor, ListViewItem mainItem = null )
 		{
+			var item = mainItem == null ? new ListViewItem ()
+			{
+				Text = message,
+				BackColor = backColor,
+			} : null;
+			
 			Invoke ( new Action ( () =>
 			{
-				listViewFind.Items.Add ( new ListViewItem ()
+				if ( mainItem != null )
 				{
-					Text = message,
-					BackColor = backColor,
-				} );
-				listViewFind.SelectedIndices.Clear ();
-				listViewFind.SelectedIndices.Add ( listViewFind.Items.Count - 1 );
-				listViewFind.Items [ listViewFind.Items.Count - 1 ].EnsureVisible ();
+					mainItem.SubItems.Add ( message, Color.Black, backColor, DefaultFont );
+				}
+				else
+				{
+					listViewFind.Items.Add ( item );
+					listViewFind.SelectedIndices.Clear ();
+					listViewFind.SelectedIndices.Add ( listViewFind.Items.Count - 1 );
+					listViewFind.Items [ listViewFind.Items.Count - 1 ].EnsureVisible ();
+				}
 			} ) );
+
+			return item;
 		}
 
 		private bool FixUrl ()
@@ -79,56 +100,51 @@ namespace URLFinder
 			textBoxFilePatterns.Enabled = false;
 			buttonFind.Enabled = false;
 
-			string [] pathes = textBoxFindingPaths.Text.Split ( '|' );
-			string [] patterns = textBoxFilePatterns.Text.Split ( '|' );
+			if ( finder == null )
+			{
+				Log ( "[초기화중][검색자 초기화 수행 중]", Color.White );
+				await Task.Run ( () =>
+				{
+					finder = new ExcelFinder ( textBoxFindingPaths.Text, textBoxFilePatterns.Text );
+					foreach ( var file in finder.CannotOpenedFiles )
+						Log ( $"[오류발생]{Path.GetFileName ( file )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon );
+				} );
+			}
 
-			Log ( $"[검색시작][{url}]", Color.Transparent );
+			ListViewItem countItem = Log ( $"[검색시작][{url}][0/{finder.Count}]", Color.Transparent );
 
-			int totalSearched = 0;
+			finder.Clear ();
+			
+			Thread counter = new Thread ( () =>
+			{
+				int recent = 0;
+				while ( true )
+				{
+					Invoke ( new Action ( () =>
+					{
+						if ( recent == finder.Procceed )
+							return;
+						countItem.Text = $"[검색시작][{url}][{finder.Procceed}/{finder.Count}]";
+						recent = finder.Procceed;
+					} ) );
+
+					if ( recent == finder.Count )
+						break;
+
+					Thread.Sleep ( 50 );
+				}
+			} );
+			counter.Start ();
+			
 			await Task.Run ( () =>
 			{
-				foreach ( string path in pathes )
-					foreach ( string pattern in patterns )
-						Parallel.ForEach ( Directory.GetFiles ( path, pattern, SearchOption.AllDirectories ), ( file ) =>
-						{
-							try
-							{
-								using ( OleDbConnection connection = new OleDbConnection (
-									$"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{file}\";Extended Properties=\"Excel 12.0;HDR=NO\""
-								) )
-								{
-									connection.Open ();
-
-									string tableName = Regex.Replace ( connection.GetSchema ( "Tables" ).Rows [ 1 ] [ "TABLE_NAME" ] as string, "['\"]", "" );
-									using ( OleDbCommand command = new OleDbCommand (
-										$"SELECT * FROM [{tableName}J2:J9999] WHERE F1 LIKE'%{url}%'",
-										connection
-									) )
-									{
-										using ( var reader = command.ExecuteReader () )
-										{
-											if ( reader.Read () )
-											{
-												Log ( $"[항목찾음]{Path.GetFileName ( file )}", Color.LightGreen );
-											}
-										}
-									}
-
-									connection.Close ();
-								}
-							}
-							catch ( Exception ex )
-							{
-								Log ( $"[오류발생]{Path.GetFileName ( file )} - {ex.Message}", Color.LightSalmon );
-							}
-							finally
-							{
-								System.Threading.Interlocked.Increment ( ref totalSearched );
-							}
-						} );
+				foreach ( var file in finder.Find ( url ) )
+					Log ( $"[항목찾음]{Path.GetFileName ( file )}", Color.LightGreen, countItem );
 			} );
 
-			Log ( $"[검색종료][{url}][{totalSearched}개 파일에서 검색 완료]", Color.Transparent );
+			Log ( $"[검색종료][{url}]", Color.Transparent );
+
+			counter.Join ( 100 );
 
 			textBoxFind.Enabled = true;
 			textBoxFindingPaths.Enabled = true;
@@ -139,6 +155,20 @@ namespace URLFinder
 			textBoxFind.Focus ();
 
 			GC.Collect ();
+		}
+
+		private void TextBoxFindingPaths_TextChanged ( object sender, EventArgs e )
+		{
+			if ( finder != null )
+				finder.Dispose ();
+			finder = null;
+		}
+
+		private void TextBoxFilePatterns_TextChanged ( object sender, EventArgs e )
+		{
+			if ( finder != null )
+				finder.Dispose ();
+			finder = null;
 		}
 
 		private void ButtonFixUrl_Click ( object sender, EventArgs e )
@@ -165,7 +195,7 @@ namespace URLFinder
 			{
 				if ( string.IsNullOrEmpty ( text.Trim () ) )
 					continue;
-				if ( Regex.IsMatch ( text, "https?://(.*)" ) || Regex.IsMatch ( text, "[0-9a-zA-Z](.[0-9a-zA-Z])+/?(.*)" ) )
+				if ( Regex.IsMatch ( text, "https?://(.*)" )/* || Regex.IsMatch ( text, "[0-9a-zA-Z](.[0-9a-zA-Z])+/?(.*)" )*/ )
 				{
 					urlList.Append ( text ).Append ( "\r\n" );
 					var managedUrl = URLUtility.GetManagedSiteUrl ( text );

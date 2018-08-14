@@ -117,6 +117,7 @@
 			this.textBoxFilePatterns.Name = "textBoxFilePatterns";
 			this.textBoxFilePatterns.Size = new System.Drawing.Size(612, 21);
 			this.textBoxFilePatterns.TabIndex = 7;
+			this.textBoxFilePatterns.TextChanged += new System.EventHandler(this.TextBoxFilePatterns_TextChanged);
 			// 
 			// labelSearchPattern
 			// 
@@ -136,6 +137,7 @@
 			this.textBoxFindingPaths.Name = "textBoxFindingPaths";
 			this.textBoxFindingPaths.Size = new System.Drawing.Size(612, 21);
 			this.textBoxFindingPaths.TabIndex = 6;
+			this.textBoxFindingPaths.TextChanged += new System.EventHandler(this.TextBoxFindingPaths_TextChanged);
 			// 
 			// labelSearchPathes
 			// 
