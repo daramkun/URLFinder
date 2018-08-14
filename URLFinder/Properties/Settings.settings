@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="URLFinder.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="finding_paths" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\모니터링 일지</Value>
+    </Setting>
+    <Setting Name="finding_file_patterns" Type="System.String" Scope="User">
+      <Value Profile="(Default)">엑셀자료-*.xlsx|*년색출전체자료.xlsx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
