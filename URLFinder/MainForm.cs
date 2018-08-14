@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using URLFinder.Finders;
+using URLFinder.Processors;
 using URLFinder.Properties;
 
 namespace URLFinder
@@ -76,9 +77,10 @@ namespace URLFinder
 				Log ( "[오류발생]URL 형식으로 입력해주세요.", Color.LightSalmon );
 				return false;
 			}
-
-			textBoxFind.Text = URLUtility.Compress ( textBoxFind.Text );
-			textBoxManagedSite.Text = URLUtility.GetManagedSiteUrl ( textBoxFind.Text );
+			
+			BaseProcessor processor = ProcessorFinder.FindProcessor ( textBoxFind.Text );
+			textBoxFind.Text = processor.ConvertUrl ( textBoxFind.Text );
+			textBoxManagedSite.Text = processor.BaseUrl.AbsoluteUri;
 
 			return true;
 		}
@@ -180,7 +182,7 @@ namespace URLFinder
 
 		private void ButtonSplitURLTitle_Click ( object sender, EventArgs e )
 		{
-			var urlTitle = textBoxURLTitle.Text.Split ( '\n' );
+			var urlTitle = textBoxURLTitle.Text.Split ( new string [] { "\r\n", "\n" }, StringSplitOptions.None );
 			StringBuilder urlList = new StringBuilder ();
 			StringBuilder titleList = new StringBuilder ();
 			StringBuilder webSiteList = new StringBuilder ();
@@ -192,13 +194,15 @@ namespace URLFinder
 					continue;
 				if ( Regex.IsMatch ( text, "https?://(.*)" )/* || Regex.IsMatch ( text, "[0-9a-zA-Z](.[0-9a-zA-Z])+/?(.*)" )*/ )
 				{
-					urlList.Append ( text ).Append ( "\r\n" );
-					var managedUrl = URLUtility.GetManagedSiteUrl ( text );
-					managedUrlList.Append ( managedUrl ).Append ( "\r\n" );
-					webSiteList.Append ( URLUtility.GetWebSiteName ( managedUrl ) ).Append ( "\r\n" );
+					BaseProcessor processor = ProcessorFinder.FindProcessor ( text );
+
+					urlList.Append ( text ).Append ( Environment.NewLine );
+					var managedUrl = processor.GetDetailBaseUrl ( text ).AbsoluteUri;
+					managedUrlList.Append ( managedUrl ).Append ( Environment.NewLine );
+					webSiteList.Append ( processor.GetDetailWebSiteName ( text ) ).Append ( Environment.NewLine );
 				}
 				else
-					titleList.Append ( text ).Append ( "\r\n" );
+					titleList.Append ( text ).Append ( Environment.NewLine );
 			}
 
 			textBoxURL.Text = urlList.ToString ();
