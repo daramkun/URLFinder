@@ -36,8 +36,6 @@ namespace URLFinder.Finders
 			{
 				foreach ( string pattern in patterns )
 				{
-					//Parallel.ForEach ( Directory.GetFiles ( path, pattern, SearchOption.AllDirectories ), ( file ) =>
-					//foreach ( var file in Directory.GetFiles ( path, pattern, SearchOption.AllDirectories ) )
 					Parallel.ForEach ( FilesEnumerator.EnumerateFiles(path, pattern, false ), ( file ) => 
 					{
 						if ( Regex.IsMatch ( file, $"(.*)모니터링일지-[가-힣]+-{DateTime.Now.ToString ( "yyMMdd" )}.xlsx" ) )

@@ -36,8 +36,6 @@
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.textBoxFilePatterns = new System.Windows.Forms.TextBox();
 			this.textBoxFindingPaths = new System.Windows.Forms.TextBox();
-			this.listViewFind = new System.Windows.Forms.ListView();
-			this.columnHeaderLog = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.buttonFind = new System.Windows.Forms.Button();
 			this.textBoxManagedSite = new System.Windows.Forms.TextBox();
 			this.buttonFixUrl = new System.Windows.Forms.Button();
@@ -53,6 +51,7 @@
 			this.buttonSplitURLTitle = new System.Windows.Forms.Button();
 			this.textBoxWebSite = new System.Windows.Forms.TextBox();
 			this.textBoxManagedUrl = new System.Windows.Forms.TextBox();
+			this.treeViewFind = new System.Windows.Forms.TreeView();
 			tabControl1 = new System.Windows.Forms.TabControl();
 			labelMainSite = new System.Windows.Forms.Label();
 			labelSearchPattern = new System.Windows.Forms.Label();
@@ -81,12 +80,12 @@
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.treeViewFind);
 			this.tabPage1.Controls.Add(labelMainSite);
 			this.tabPage1.Controls.Add(this.textBoxFilePatterns);
 			this.tabPage1.Controls.Add(labelSearchPattern);
 			this.tabPage1.Controls.Add(this.textBoxFindingPaths);
 			this.tabPage1.Controls.Add(labelSearchPathes);
-			this.tabPage1.Controls.Add(this.listViewFind);
 			this.tabPage1.Controls.Add(this.buttonFind);
 			this.tabPage1.Controls.Add(this.textBoxManagedSite);
 			this.tabPage1.Controls.Add(this.buttonFixUrl);
@@ -148,27 +147,6 @@
 			labelSearchPathes.Size = new System.Drawing.Size(57, 12);
 			labelSearchPathes.TabIndex = 22;
 			labelSearchPathes.Text = "검색 경로";
-			// 
-			// listViewFind
-			// 
-			this.listViewFind.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.listViewFind.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderLog});
-			this.listViewFind.LabelWrap = false;
-			this.listViewFind.Location = new System.Drawing.Point(13, 100);
-			this.listViewFind.MultiSelect = false;
-			this.listViewFind.Name = "listViewFind";
-			this.listViewFind.Size = new System.Drawing.Size(673, 401);
-			this.listViewFind.TabIndex = 5;
-			this.listViewFind.UseCompatibleStateImageBehavior = false;
-			this.listViewFind.View = System.Windows.Forms.View.Details;
-			// 
-			// columnHeaderLog
-			// 
-			this.columnHeaderLog.Text = "로그";
-			this.columnHeaderLog.Width = 560;
 			// 
 			// buttonFind
 			// 
@@ -362,6 +340,19 @@
 			this.textBoxManagedUrl.TabIndex = 5;
 			this.textBoxManagedUrl.Click += new System.EventHandler(this.TextBoxManagedUrl_Click);
 			// 
+			// treeViewFind
+			// 
+			this.treeViewFind.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.treeViewFind.FullRowSelect = true;
+			this.treeViewFind.ItemHeight = 18;
+			this.treeViewFind.Location = new System.Drawing.Point(13, 97);
+			this.treeViewFind.Name = "treeViewFind";
+			this.treeViewFind.ShowRootLines = false;
+			this.treeViewFind.Size = new System.Drawing.Size(673, 413);
+			this.treeViewFind.TabIndex = 28;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -390,10 +381,8 @@
 		private System.Windows.Forms.Button buttonFixUrl;
 		private System.Windows.Forms.TextBox textBoxManagedSite;
 		private System.Windows.Forms.Button buttonFind;
-		private System.Windows.Forms.ListView listViewFind;
 		private System.Windows.Forms.TextBox textBoxFindingPaths;
 		private System.Windows.Forms.TextBox textBoxFilePatterns;
-		private System.Windows.Forms.ColumnHeader columnHeaderLog;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TextBox textBoxMultiline;
 		private System.Windows.Forms.Button buttonMergeLine;
@@ -405,6 +394,7 @@
 		private System.Windows.Forms.Button buttonSplitURLTitle;
 		private System.Windows.Forms.TextBox textBoxWebSite;
 		private System.Windows.Forms.TextBox textBoxManagedUrl;
+		private System.Windows.Forms.TreeView treeViewFind;
 	}
 }
 

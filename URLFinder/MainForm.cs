@@ -42,27 +42,23 @@ namespace URLFinder
 			Settings.Default.Save ();
 		}
 
-		private ListViewItem Log ( string message, Color backColor, ListViewItem mainItem = null )
+		private TreeNode Log ( string message, Color backColor, TreeNode mainItem = null )
 		{
-			var item = mainItem == null ? new ListViewItem ()
+			var item = new TreeNode ()
 			{
 				Text = message,
 				BackColor = backColor,
-			} : null;
+			};
 			
 			Invoke ( new Action ( () =>
 			{
 				if ( mainItem != null )
 				{
-					mainItem.SubItems.Add ( message, Color.Black, backColor, DefaultFont );
+					mainItem.Nodes.Add ( item );
+					mainItem.Expand ();
 				}
 				else
-				{
-					listViewFind.Items.Add ( item );
-					listViewFind.SelectedIndices.Clear ();
-					listViewFind.SelectedIndices.Add ( listViewFind.Items.Count - 1 );
-					listViewFind.Items [ listViewFind.Items.Count - 1 ].EnsureVisible ();
-				}
+					treeViewFind.Nodes.Add ( item );
 			} ) );
 
 			return item;
@@ -102,16 +98,17 @@ namespace URLFinder
 
 			if ( finder == null )
 			{
-				Log ( "[초기화중][검색자 초기화 수행 중]", Color.White );
+				var initial = Log ( "[초기화중][검색자 초기화 수행 중]", Color.Transparent );
 				await Task.Run ( () =>
 				{
 					finder = new ExcelFinder ( textBoxFindingPaths.Text, textBoxFilePatterns.Text );
 					foreach ( var file in finder.CannotOpenedFiles )
-						Log ( $"[오류발생]{Path.GetFileName ( file )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon );
+						Log ( $"[오류발생]{Path.GetFileName ( file )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon, initial );
 				} );
+				Log ( $"[작업완료][총 {finder.Count}개 엑셀 파일에서 검색 가능한 상태]", Color.Transparent, initial );
 			}
 
-			ListViewItem countItem = Log ( $"[검색시작][{url}][0/{finder.Count}]", Color.Transparent );
+			var countItem = Log ( $"[검색시작][{url}][0/{finder.Count}]", Color.Transparent );
 
 			finder.Clear ();
 			
@@ -141,8 +138,6 @@ namespace URLFinder
 				foreach ( var file in finder.Find ( url ) )
 					Log ( $"[항목찾음]{Path.GetFileName ( file )}", Color.LightGreen, countItem );
 			} );
-
-			Log ( $"[검색종료][{url}]", Color.Transparent );
 
 			counter.Join ( 100 );
 
