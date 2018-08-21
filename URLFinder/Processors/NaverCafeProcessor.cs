@@ -24,12 +24,19 @@ namespace URLFinder.Processors
 					if ( ( cafeMatch != null && cafeMatch.Success )
 						&& ( noMatch != null && noMatch.Success ) )
 					{
-						url = $"http://cafe.naver.com/{cafeMatch.Groups [ 2 ].Value}/{noMatch.Groups [ 2 ].Value}";
+						url = $"https://cafe.naver.com/{cafeMatch.Groups [ 2 ].Value}/{noMatch.Groups [ 2 ].Value}";
 						return url;
 					}
 				}
 				else
-					return Regex.Replace ( url, "https?://cafe.naver.com/[a-zA-Z0-9_]+/[0-9]+(.*)", "" );
+				{
+					var match = Regex.Match ( url, "https?://cafe.naver.com/([a-zA-Z0-9_]+)/([0-9]+)(.*)" );
+					if ( match != null && match.Success )
+					{
+						url = $"https://cafe.naver.com/{match.Groups [ 1 ].Value}/{match.Groups [ 2 ].Value}";
+						return url;
+					}
+				}
 			}
 			return base.ConvertUrl ( url );
 		}

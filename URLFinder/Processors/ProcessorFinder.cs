@@ -139,7 +139,7 @@ namespace URLFinder.Processors
 				}
 			}
 
-			return new SimpleProcessor ( "", new Uri ( url.Substring ( 0, url.IndexOf ( '/', 7 ) ) ) );
+			return new SimpleProcessor ( "", new Uri ( url.Substring ( 0, url.IndexOf ( '/', 9 ) ) ) );
 		}
 	}
 }

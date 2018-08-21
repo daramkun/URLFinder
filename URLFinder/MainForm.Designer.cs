@@ -34,6 +34,7 @@
 			System.Windows.Forms.Label labelSearchPathes;
 			System.Windows.Forms.Label labelFindingURL;
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.treeViewFind = new System.Windows.Forms.TreeView();
 			this.textBoxFilePatterns = new System.Windows.Forms.TextBox();
 			this.textBoxFindingPaths = new System.Windows.Forms.TextBox();
 			this.buttonFind = new System.Windows.Forms.Button();
@@ -51,7 +52,9 @@
 			this.buttonSplitURLTitle = new System.Windows.Forms.Button();
 			this.textBoxWebSite = new System.Windows.Forms.TextBox();
 			this.textBoxManagedUrl = new System.Windows.Forms.TextBox();
-			this.treeViewFind = new System.Windows.Forms.TreeView();
+			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.buttonOpenToday = new System.Windows.Forms.Button();
+			this.buttonMakeZipFile = new System.Windows.Forms.Button();
 			tabControl1 = new System.Windows.Forms.TabControl();
 			labelMainSite = new System.Windows.Forms.Label();
 			labelSearchPattern = new System.Windows.Forms.Label();
@@ -62,6 +65,7 @@
 			this.tabPage2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.tabPage4.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -72,6 +76,7 @@
 			tabControl1.Controls.Add(this.tabPage1);
 			tabControl1.Controls.Add(this.tabPage2);
 			tabControl1.Controls.Add(this.tabPage3);
+			tabControl1.Controls.Add(this.tabPage4);
 			tabControl1.Location = new System.Drawing.Point(5, 5);
 			tabControl1.Name = "tabControl1";
 			tabControl1.SelectedIndex = 0;
@@ -98,6 +103,19 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "URL검색";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// treeViewFind
+			// 
+			this.treeViewFind.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.treeViewFind.FullRowSelect = true;
+			this.treeViewFind.ItemHeight = 18;
+			this.treeViewFind.Location = new System.Drawing.Point(13, 97);
+			this.treeViewFind.Name = "treeViewFind";
+			this.treeViewFind.ShowRootLines = false;
+			this.treeViewFind.Size = new System.Drawing.Size(673, 413);
+			this.treeViewFind.TabIndex = 28;
 			// 
 			// labelMainSite
 			// 
@@ -340,18 +358,37 @@
 			this.textBoxManagedUrl.TabIndex = 5;
 			this.textBoxManagedUrl.Click += new System.EventHandler(this.TextBoxManagedUrl_Click);
 			// 
-			// treeViewFind
+			// tabPage4
 			// 
-			this.treeViewFind.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.treeViewFind.FullRowSelect = true;
-			this.treeViewFind.ItemHeight = 18;
-			this.treeViewFind.Location = new System.Drawing.Point(13, 97);
-			this.treeViewFind.Name = "treeViewFind";
-			this.treeViewFind.ShowRootLines = false;
-			this.treeViewFind.Size = new System.Drawing.Size(673, 413);
-			this.treeViewFind.TabIndex = 28;
+			this.tabPage4.Controls.Add(this.buttonMakeZipFile);
+			this.tabPage4.Controls.Add(this.buttonOpenToday);
+			this.tabPage4.Location = new System.Drawing.Point(4, 22);
+			this.tabPage4.Name = "tabPage4";
+			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage4.Size = new System.Drawing.Size(696, 579);
+			this.tabPage4.TabIndex = 3;
+			this.tabPage4.Text = "그 외";
+			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// buttonOpenToday
+			// 
+			this.buttonOpenToday.Location = new System.Drawing.Point(6, 6);
+			this.buttonOpenToday.Name = "buttonOpenToday";
+			this.buttonOpenToday.Size = new System.Drawing.Size(684, 23);
+			this.buttonOpenToday.TabIndex = 0;
+			this.buttonOpenToday.Text = "오늘자 폴더 열기";
+			this.buttonOpenToday.UseVisualStyleBackColor = true;
+			this.buttonOpenToday.Click += new System.EventHandler(this.buttonOpenToday_Click);
+			// 
+			// buttonMakeZipFile
+			// 
+			this.buttonMakeZipFile.Location = new System.Drawing.Point(6, 35);
+			this.buttonMakeZipFile.Name = "buttonMakeZipFile";
+			this.buttonMakeZipFile.Size = new System.Drawing.Size(684, 23);
+			this.buttonMakeZipFile.TabIndex = 1;
+			this.buttonMakeZipFile.Text = "압축 파일 생성";
+			this.buttonMakeZipFile.UseVisualStyleBackColor = true;
+			this.buttonMakeZipFile.Click += new System.EventHandler(this.buttonMakeZipFile_Click);
 			// 
 			// MainForm
 			// 
@@ -371,6 +408,7 @@
 			this.tabPage3.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			this.tabPage4.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -395,6 +433,9 @@
 		private System.Windows.Forms.TextBox textBoxWebSite;
 		private System.Windows.Forms.TextBox textBoxManagedUrl;
 		private System.Windows.Forms.TreeView treeViewFind;
+		private System.Windows.Forms.TabPage tabPage4;
+		private System.Windows.Forms.Button buttonOpenToday;
+		private System.Windows.Forms.Button buttonMakeZipFile;
 	}
 }
 

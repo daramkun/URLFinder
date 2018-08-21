@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using URLFinder.Finders;
 using URLFinder.Processors;
 using URLFinder.Properties;
+using URLFinder.Utilities;
 
 namespace URLFinder
 {
@@ -24,6 +25,8 @@ namespace URLFinder
 
 		public MainForm ()
 		{
+			GemBox.Pdf.ComponentInfo.SetLicense ( "FREE-LIMITED-KEY" );
+
 			InitializeComponent ();
 
 			textBoxFindingPaths.Text = Settings.Default.finding_paths;
@@ -65,6 +68,13 @@ namespace URLFinder
 			return item;
 		}
 
+		private string DeleteSlash ( string v )
+		{
+			if ( v [ v.Length - 1 ] == '/' )
+				return v.Substring ( 0, v.Length - 1 );
+			return v;
+		}
+
 		private bool FixUrl ()
 		{
 			if ( string.IsNullOrEmpty ( textBoxFind.Text ) )
@@ -80,7 +90,7 @@ namespace URLFinder
 			
 			BaseProcessor processor = ProcessorFinder.FindProcessor ( textBoxFind.Text );
 			textBoxFind.Text = processor.ConvertUrl ( textBoxFind.Text );
-			textBoxManagedSite.Text = processor.BaseUrl.AbsoluteUri;
+			textBoxManagedSite.Text = DeleteSlash ( processor.BaseUrl.AbsoluteUri );
 
 			return true;
 		}
@@ -198,7 +208,7 @@ namespace URLFinder
 
 					urlList.Append ( text ).Append ( Environment.NewLine );
 					var managedUrl = processor.GetDetailBaseUrl ( text ).AbsoluteUri;
-					managedUrlList.Append ( managedUrl ).Append ( Environment.NewLine );
+					managedUrlList.Append ( DeleteSlash ( managedUrl ) ).Append ( Environment.NewLine );
 					webSiteList.Append ( processor.GetDetailWebSiteName ( text ) ).Append ( Environment.NewLine );
 				}
 				else
@@ -229,6 +239,46 @@ namespace URLFinder
 		private void TextBoxManagedUrl_Click ( object sender, EventArgs e )
 		{
 			textBoxManagedUrl.SelectAll ();
+		}
+
+		private void buttonOpenToday_Click ( object sender, EventArgs e )
+		{
+			var now = DateTime.Now;
+			var path = $@"D:\모니터링 일지\{now.Year}\{now.Month:00}\{now.GetWeekOfMonth ()}주\모니터링일지-{Program.Name}-{now.ToString ( "yyMMdd" )}\";
+			Process.Start ( "explorer", path );
+		}
+
+		private void buttonMakeZipFile_Click ( object sender, EventArgs e )
+		{
+			string [] pdfs = Directory.GetFiles ( @"D:\모니터링 일지", "*.pdf", SearchOption.TopDirectoryOnly );
+			if ( pdfs == null || pdfs.Length < 10 )
+			{
+				MessageBox.Show ( "본 뜬 PDF 파일 개수가 10개 미만입니다." );
+				return;
+			}
+
+			StringBuilder argument = new StringBuilder ();
+			foreach ( string pdf in pdfs )
+				argument.Append ( '"' ).Append ( pdf ).Append ( '"' ).Append ( ' ' );
+
+			DateTime now = DateTime.Now;
+			using ( var process = Process.Start ( @"C:\Program Files\Bandizip\bc.exe",
+				$@"c ""D:\모니터링 일지\{now.Year}\{now.Month:00}\{now.GetWeekOfMonth ()}주\모니터링일지-{Program.Name}-{now.ToString ( "yyMMdd" )}\{now.ToString ( "MMdd" )}.zip"" {argument.ToString ()} -y -aoa -fmt:zip" ) )
+			{
+				while ( !process.HasExited )
+					;
+			}
+
+			using ( var process = Process.Start ( @"C:\Program Files\Bandizip\bc.exe",
+				$@"c ""D:\모니터링 일지\모니터링일지-{Program.Name}-{now.ToString ( "yyMMdd" )}.zip"" ""D:\모니터링 일지\{now.Year}\{now.Month:00}\{now.GetWeekOfMonth ()}주\모니터링일지-{Program.Name}-{now.ToString ( "yyMMdd" )}"" -y -aoa -fmt:zip" ) )
+			{
+				while ( !process.HasExited )
+					;
+			}
+
+			FileDeleter.Delete ( pdfs );
+
+			MessageBox.Show ( "완료되었습니다." );
 		}
 	}
 }
