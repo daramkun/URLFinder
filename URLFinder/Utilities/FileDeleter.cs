@@ -13,7 +13,7 @@ namespace URLFinder.Utilities
 		public static void Delete ( params string [] filenames )
 		{
 			IFileOperation fileOperation = Activator.CreateInstance ( Type.GetTypeFromCLSID ( new Guid ( "3ad05575-8857-4850-9277-11b85bdb8e09" ) ) ) as IFileOperation;
-			fileOperation?.SetOperationFlags ( OperationFlag.AllowUndo	| OperationFlag.NoUI | OperationFlag.FilesOnly );
+			fileOperation?.SetOperationFlags ( OperationFlag.AllowUndo | OperationFlag.NoUI | OperationFlag.FilesOnly );
 
 			foreach ( var filename in filenames )
 			{

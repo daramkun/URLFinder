@@ -22,29 +22,5 @@ namespace URLFinder.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\모니터링 일지")]
-        public string finding_paths {
-            get {
-                return ((string)(this["finding_paths"]));
-            }
-            set {
-                this["finding_paths"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("엑셀자료-*.xlsx|*년색출전체자료.xlsx")]
-        public string finding_file_patterns {
-            get {
-                return ((string)(this["finding_file_patterns"]));
-            }
-            set {
-                this["finding_file_patterns"] = value;
-            }
-        }
     }
 }

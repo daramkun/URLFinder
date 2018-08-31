@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using URLFinder.Finder;
 
 namespace URLFinder.Processors
 {
@@ -61,74 +62,7 @@ namespace URLFinder.Processors
 			}
 		}
 
-		public static void SearchProcessorsFromExcel ( string findingPathes, string findingPatterns )
-		{
-			string [] pathes = findingPathes.Split ( '|' );
-			string [] patterns = findingPatterns.Split ( '|' );
-
-			foreach ( string path in pathes )
-			{
-				foreach ( string pattern in patterns )
-				{
-					//Parallel.ForEach ( Directory.GetFiles ( path, pattern, SearchOption.AllDirectories ), ( file ) =>
-					foreach ( var file in Directory.GetFiles ( path, pattern, SearchOption.AllDirectories ) )
-					{
-						try
-						{
-							using ( OleDbConnection connection = new OleDbConnection (
-								$"Provider=\"Microsoft.ACE.OLEDB.12.0\";Data Source=\"{file}\";Extended Properties=\"Excel 12.0;HDR=NO\";"
-							) )
-							{
-								connection.Open ();
-
-								string tableName = Regex.Replace ( connection.GetSchema ( "Tables" ).Rows [ 1 ] [ "TABLE_NAME" ] as string, "['\"]", "" );
-								using ( OleDbCommand command = new OleDbCommand (
-									$"SELECT * FROM [{tableName}I2:I9999,AF2:AF9999]",
-									connection
-								) )
-								{
-									using ( var reader = command.ExecuteReader () )
-									{
-										while ( reader.Read () )
-										{
-											string website = reader.GetString ( 0 );
-											string baseUrl = reader.GetString ( 1 );
-
-											Uri tempUrl = new Uri ( baseUrl );
-											string host = tempUrl.Host;
-											if ( host.IndexOf ( "www." ) == 0 )
-												host = host.Substring ( 5 );
-
-											if ( processors.ContainsKey ( host ) )
-												continue;
-
-											processors.Add ( host, new SimpleProcessor ( website, tempUrl ) );
-										}
-									}
-								}
-
-								connection.Close ();
-							}
-						}
-						catch
-						{
-
-						}
-						finally
-						{
-
-						}
-					}// );
-				}
-			}
-		}
-
-		public static void StoreSearchedProcessors ()
-		{
-
-		}
-
-		public static BaseProcessor FindProcessor ( string url )
+		public static BaseProcessor FindProcessor ( string url, bool makeCustomProcessor = true )
 		{
 			foreach ( var processor in processors )
 			{
@@ -139,7 +73,11 @@ namespace URLFinder.Processors
 				}
 			}
 
-			return new SimpleProcessor ( "", new Uri ( url.Substring ( 0, url.IndexOf ( '/', 9 ) ) ) );
+			if ( !makeCustomProcessor )
+				return null;
+
+			return ExcelIndexer.SharedExcelIndexer.GetGuessedProcessor ( url )
+				?? new SimpleProcessor ( "", new Uri ( url.Substring ( 0, url.IndexOf ( '/', 9 ) ) ) );
 		}
 	}
 }

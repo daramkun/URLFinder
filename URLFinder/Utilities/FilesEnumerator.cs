@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,7 +60,7 @@ namespace URLFinder.Utilities
 			[MarshalAs ( UnmanagedType.ByValTStr, SizeConst = 14 )]
 			public string cAlternateFileName;
 		}
-		
+
 		[DllImport ( "Kernel32", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode )]
 		static extern IntPtr FindFirstFile ( string lpFileName, out WIN32_FIND_DATA lpFindFileData );
 		[DllImport ( "Kernel32", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode )]
