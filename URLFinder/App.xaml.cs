@@ -20,7 +20,7 @@ namespace URLFinder
 	{
 		public App ()
 		{
-			RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+			//RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 		}
 
 		protected override void OnStartup ( StartupEventArgs e )

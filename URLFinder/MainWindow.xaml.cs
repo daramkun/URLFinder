@@ -29,7 +29,7 @@ namespace URLFinder
 	/// </summary>
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
-		Thread uiThread;
+		readonly Thread uiThread;
 		ExcelIndexer indexer;
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -42,6 +42,8 @@ namespace URLFinder
 			InitializeComponent ();
 
 			calendarManagement.DisplayDateEnd = DateTime.Today;
+
+			tabSearchKeyword.SelectedIndex = ( int ) DateTime.Today.DayOfWeek - 1;
 		}
 
 		private TreeViewItem Log ( string v, Color color, TreeViewItem parentItem = null )
@@ -326,12 +328,17 @@ namespace URLFinder
 				string [] pdfs = Directory.GetFiles ( CustomizedValue.WorkingDirectory, "*.pdf", SearchOption.TopDirectoryOnly );
 				if ( pdfs == null || pdfs.Length < 10 )
 				{
-					MessageBox.Show ( "본 뜬 PDF 파일 개수가 10개 미만입니다." );
-					return;
+					if ( !File.Exists ( pdfZipPath ) )
+					{
+						MessageBox.Show ( "본 뜬 PDF 파일 개수가 10개 미만입니다." );
+						return;
+					}
 				}
-
-				ArchivingUtility.ArchivePdfs ( pdfZipPath, pdfs );
-				FileDeleter.Delete ( pdfs );
+				else
+				{
+					ArchivingUtility.ArchivePdfs ( pdfZipPath, pdfs );
+					FileDeleter.Delete ( pdfs );
+				}
 
 				ArchivingUtility.ArchiveDirectory ( System.IO.Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
 			} );

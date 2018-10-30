@@ -18,7 +18,7 @@ namespace URLFinder.Processors
 			if ( ( idMatch != null && idMatch.Success )
 				&& ( noMatch != null && noMatch.Success ) )
 			{
-				url = $"{BaseUrl}/{ZeroboardRootDirectory}view.php?id={idMatch.Groups [ 2 ].Value}&no={noMatch.Groups [ 2 ].Value}";
+				url = $"{BaseUrl}{ZeroboardRootDirectory}view.php?id={idMatch.Groups [ 2 ].Value}&no={noMatch.Groups [ 2 ].Value}";
 				return url;
 			}
 			return base.ConvertUrl ( url );

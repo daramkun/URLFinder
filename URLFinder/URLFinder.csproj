@@ -65,6 +65,7 @@
     <Compile Include="Processors\GaedripProcessor.cs" />
     <Compile Include="Processors\HumorUnivProcessor.cs" />
     <Compile Include="Processors\IlbeProcessor.cs" />
+    <Compile Include="Processors\MLBParkProcessor.cs" />
     <Compile Include="Processors\NaverBlogProcessor.cs" />
     <Compile Include="Processors\NaverCafeProcessor.cs" />
     <Compile Include="Processors\NaverKINProcessor.cs" />
