@@ -21,7 +21,7 @@ namespace URLFinder.Utilities
 						var entry = archive.CreateEntry ( Path.GetFileName ( pdfPath ), CompressionLevel.Optimal );
 						using ( Stream entryStream = entry.Open () )
 						{
-							using ( Stream pdfStream = new FileStream ( pdfPath, FileMode.Open ) )
+							using ( Stream pdfStream = new FileStream ( pdfPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite ) )
 							{
 								pdfStream.CopyTo ( entryStream );
 							}
@@ -37,12 +37,15 @@ namespace URLFinder.Utilities
 			{
 				using ( ZipArchive archive = new ZipArchive ( fs, ZipArchiveMode.Create ) )
 				{
-					foreach ( var pdfPath in Directory.GetFiles ( dir ) )
+					foreach ( var filePath in Directory.GetFiles ( dir ) )
 					{
-						var entry = archive.CreateEntry ( Path.GetFileName ( pdfPath ), CompressionLevel.Optimal );
+						if ( Path.GetFileName ( filePath ) [ 0 ] == '~' )
+							continue;
+
+						var entry = archive.CreateEntry ( Path.GetFileName ( filePath ), CompressionLevel.Optimal );
 						using ( Stream entryStream = entry.Open () )
 						{
-							using ( Stream pdfStream = new FileStream ( pdfPath, FileMode.Open ) )
+							using ( Stream pdfStream = new FileStream ( filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite ) )
 							{
 								pdfStream.CopyTo ( entryStream );
 							}

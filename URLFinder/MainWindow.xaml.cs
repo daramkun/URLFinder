@@ -95,7 +95,8 @@ namespace URLFinder
 			}
 
 			BaseProcessor processor = ProcessorFinder.FindProcessor ( textBoxSearchText.Text, false );
-			textBoxSearchText.Text = processor?.ConvertUrl ( textBoxSearchText.Text );
+			if ( processor != null )
+				textBoxSearchText.Text = processor.ConvertUrl ( textBoxSearchText.Text );
 
 			return true;
 		}
@@ -159,6 +160,11 @@ namespace URLFinder
 			calendarManagement.SelectedDate = DateTime.Today;
 
 			PropertyChanged?.Invoke ( this, new PropertyChangedEventArgs ( nameof ( ExcelIndexer ) ) );
+		}
+
+		private void MainWindow_Closing ( object sender, CancelEventArgs e )
+		{
+			Properties.Settings.Default.Save ();
 		}
 
 		private async void URLSearchButton_Click ( object sender, RoutedEventArgs e )
@@ -333,6 +339,28 @@ namespace URLFinder
 			MessageBox.Show ( "압축이 완료되었습니다." );
 
 			( sender as Button ).IsEnabled = true;
+		}
+
+		private void textBoxSearchText_PreviewMouseLeftButtonDown ( object sender, MouseButtonEventArgs e )
+		{
+			TextBox tb = ( sender as TextBox );
+			if ( tb != null )
+			{
+				if ( !tb.IsKeyboardFocusWithin )
+				{
+					e.Handled = true;
+					tb.Focus ();
+				}
+			}
+		}
+
+		private void textBoxSearchText_GotKeyboardFocus ( object sender, KeyboardFocusChangedEventArgs e )
+		{
+			TextBox tb = ( sender as TextBox );
+			if ( tb != null )
+			{
+				tb.SelectAll ();
+			}
 		}
 	}
 }

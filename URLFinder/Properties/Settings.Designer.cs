@@ -22,5 +22,77 @@ namespace URLFinder.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_mon {
+            get {
+                return ((string)(this["search_keyword_mon"]));
+            }
+            set {
+                this["search_keyword_mon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_tue {
+            get {
+                return ((string)(this["search_keyword_tue"]));
+            }
+            set {
+                this["search_keyword_tue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_wed {
+            get {
+                return ((string)(this["search_keyword_wed"]));
+            }
+            set {
+                this["search_keyword_wed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_thu {
+            get {
+                return ((string)(this["search_keyword_thu"]));
+            }
+            set {
+                this["search_keyword_thu"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_fri {
+            get {
+                return ((string)(this["search_keyword_fri"]));
+            }
+            set {
+                this["search_keyword_fri"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_keyword_extra {
+            get {
+                return ((string)(this["search_keyword_extra"]));
+            }
+            set {
+                this["search_keyword_extra"] = value;
+            }
+        }
     }
 }

@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:URLFinder"
         xmlns:conv="clr-namespace:URLFinder.Converters"
         xmlns:finder="clr-namespace:URLFinder.Finder"
+        xmlns:prop="clr-namespace:URLFinder.Properties"
         mc:Ignorable="d" TextOptions.TextRenderingMode="Grayscale"
-        Title="URL 검색기" Height="600" Width="800" FontFamily="굴림" Loaded="MainWindow_Loaded">
+        Title="URL 검색기" Height="600" Width="800" FontFamily="굴림" Loaded="MainWindow_Loaded" Closing="MainWindow_Closing">
     <Window.Resources>
         <conv:NullToBooleanConverter x:Key="nullToBooleanConverter" />
         <conv:DateIsTodayConverter x:Key="dateIsTodayConverter" />
@@ -25,7 +26,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBox Name="textBoxSearchText" Padding="1" />
+                <TextBox Name="textBoxSearchText" Padding="1" PreviewMouseLeftButtonDown="textBoxSearchText_PreviewMouseLeftButtonDown" GotKeyboardFocus="textBoxSearchText_GotKeyboardFocus" />
                 <Button Name="buttonSearch" Content="검색" Grid.Column="1" IsDefault="True" Click="URLSearchButton_Click" />
 
                 <TreeView Name="treeViewLog" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,8,0,0">
@@ -88,10 +89,33 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="오늘자 작업물" IsEnabled="{Binding  ElementName=calendarManagement, Path=SelectedDate, Converter={StaticResource dateIsTodayConverter}}">
+                    <GroupBox Header="오늘자 작업물" IsEnabled="{Binding ElementName=calendarManagement, Path=SelectedDate, Converter={StaticResource dateIsTodayConverter}}" Margin="0,8,0,0">
                         <StackPanel Margin="4">
                             <Button Height="24" Content="압축하기" Margin="4" Click="CompressTodaysFilesButton_Click" />
                         </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="검색어" Margin="0,8,0,0" Height="240">
+                        <TabControl Margin="4">
+                            <TabItem Header="월">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_mon}" />
+                            </TabItem>
+                            <TabItem Header="화">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_tue}" />
+                            </TabItem>
+                            <TabItem Header="수">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_wed}" />
+                            </TabItem>
+                            <TabItem Header="목">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_thu}" />
+                            </TabItem>
+                            <TabItem Header="금">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_fri}" />
+                            </TabItem>
+                            <TabItem Header="추가 검색어">
+                                <TextBox AcceptsReturn="True" DataContext="{x:Static prop:Settings.Default}" Text="{Binding search_keyword_extra}" />
+                            </TabItem>
+                        </TabControl>
                     </GroupBox>
                 </StackPanel>
             </Grid>
