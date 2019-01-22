@@ -32,6 +32,10 @@ namespace URLFinder.Processors
 			var commentStart = url.IndexOf ( '#' );
 			if ( commentStart >= 0 )
 				url = url.Substring ( 0, commentStart );
+			if ( url [ url.Length - 1 ] == '?' )
+				url = url.Substring ( 0, url.Length - 1 );
+			if ( url [ url.Length - 1 ] == '/' )
+				url = url.Substring ( 0, url.Length - 1 );
 
 			return url;
 		}
@@ -49,8 +53,8 @@ namespace URLFinder.Processors
 
 	public class SimpleProcessor : BaseProcessor
 	{
-		string _webSiteName;
-		Uri _baseUrl;
+		readonly string _webSiteName;
+		readonly Uri _baseUrl;
 
 		public override string WebSiteName => _webSiteName;
 		public override Uri BaseUrl => _baseUrl;
