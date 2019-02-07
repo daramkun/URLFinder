@@ -25,6 +25,16 @@ namespace URLFinder.Processors
 					url = $"http://blog.naver.com/{idMatch.Groups [ 2 ].Value}/{noMatch.Groups [ 2 ].Value}";
 					return url;
 				}
+				else
+				{
+					idMatch = Regex.Match ( url, "blog.naver.com/([a-zA-Z0-9_]+)(.*)" );
+					if ( ( idMatch != null && idMatch.Success )
+					&& ( noMatch != null && noMatch.Success ) )
+					{
+						url = $"http://blog.naver.com/{idMatch.Groups [ 1 ].Value}/{noMatch.Groups [ 2 ].Value}";
+						return url;
+					}
+				}
 			}
 			return base.ConvertUrl ( url );
 		}

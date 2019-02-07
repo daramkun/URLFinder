@@ -40,22 +40,15 @@ namespace URLFinder.Processors
 			return url;
 		}
 
-		public virtual Uri GetDetailBaseUrl ( string url )
-		{
-			return BaseUrl;
-		}
-
-		public virtual string GetDetailWebSiteName ( string url )
-		{
-			return WebSiteName;
-		}
+		public virtual Uri GetDetailBaseUrl ( string url ) => BaseUrl;
+		public virtual string GetDetailWebSiteName ( string url ) => WebSiteName;
 	}
 
 	public class SimpleProcessor : BaseProcessor
 	{
 		readonly string _webSiteName;
 		readonly Uri _baseUrl;
-
+		 
 		public override string WebSiteName => _webSiteName;
 		public override Uri BaseUrl => _baseUrl;
 

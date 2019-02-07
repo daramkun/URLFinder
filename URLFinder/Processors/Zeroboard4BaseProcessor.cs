@@ -24,4 +24,21 @@ namespace URLFinder.Processors
 			return base.ConvertUrl ( url );
 		}
 	}
+
+	public class Zeroboard4SimpleProcessor : Zeroboard4BaseProcessor
+	{
+		readonly string webSiteName, zb4RootDir;
+		readonly Uri baseUrl;
+
+		public override string ZeroboardRootDirectory => zb4RootDir;
+		public override string WebSiteName => webSiteName;
+		public override Uri BaseUrl => baseUrl;
+
+		public Zeroboard4SimpleProcessor ( string webSiteName, Uri baseUrl, string zb4RootDir = "zboard/" )
+		{
+			this.webSiteName = webSiteName;
+			this.baseUrl = baseUrl;
+			this.zb4RootDir = zb4RootDir;
+		}
+	}
 }

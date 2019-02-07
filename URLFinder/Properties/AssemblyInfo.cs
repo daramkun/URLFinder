@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration ( "" )]
 [assembly: AssemblyCompany ( "" )]
 [assembly: AssemblyProduct ( "URLFinder" )]
-[assembly: AssemblyCopyright ( "Copyright © 2018 Jin Jae-yeon" )]
+[assembly: AssemblyCopyright ( "Copyright © 2018-2019 Jin Jae-yeon" )]
 [assembly: AssemblyTrademark ( "" )]
 [assembly: AssemblyCulture ( "" )]
 
@@ -30,17 +30,6 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
-[assembly: ThemeInfo (
-	ResourceDictionaryLocation.None, //테마별 리소스 사전의 위치
-									 //(페이지 또는 응용 프로그램 리소스 사진에
-									 // 리소스가 없는 경우에 사용됨)
-	ResourceDictionaryLocation.SourceAssembly //제네릭 리소스 사전의 위치
-											  //(페이지 또는 응용 프로그램 리소스 사진에
-											  // 리소스가 없는 경우에 사용됨)
-)]
-
-
 // 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 //
 //      주 버전
@@ -51,5 +40,7 @@ using System.Windows;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ( "2.0.0.0" )]
-[assembly: AssemblyFileVersion ( "2.0.0.0" )]
+[assembly: AssemblyVersion ( "3.0.0.0" )]
+[assembly: AssemblyFileVersion ( "3.0.0.0" )]
+[assembly: Guid ( "08EE9969-CE6C-48B2-9926-F49DD24F4370" )]
+

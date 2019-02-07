@@ -25,7 +25,8 @@ namespace URLFinder.Processors
 				if ( !type.IsSubclassOf ( typeof ( BaseProcessor ) ) )
 					continue;
 
-				if ( type == typeof ( SimpleProcessor ) )
+				if ( type == typeof ( SimpleProcessor ) || type == typeof ( XpressEngineSimpleProcessor )
+					|| type == typeof ( Zeroboard4SimpleProcessor ) )
 					continue;
 
 				BaseProcessor temp = Activator.CreateInstance ( type ) as BaseProcessor;
@@ -36,14 +37,14 @@ namespace URLFinder.Processors
 				processors.Add ( host, temp );
 			}
 
-			foreach ( var processor in new [] {
+			foreach ( var processor in new BaseProcessor [] {
 				new SimpleProcessor ( "트위터", new Uri ( "https://twitter.com" ) ),
 				new SimpleProcessor ( "페이스북", new Uri ( "https://www.facebook.com" ) ),
 				new SimpleProcessor ( "유튜브", new Uri ( "https://www.youtube.com" ) ),
 				new SimpleProcessor ( "다음아고라", new Uri ( "http://agora.media.daum.net" ) ),
 				new SimpleProcessor ( "수용소", new Uri ( "http://www.suyongso.com" ) ),
 				new SimpleProcessor ( "나무라이브", new Uri ( "https://namu.live" ) ),
-				new SimpleProcessor ( "에펨코리아", new Uri ( "http://www.fmkorea.com" ) ),
+				new SimpleProcessor ( "에펨네이션", new Uri ( "http://www.fmnation.net" ) ),
 				new SimpleProcessor ( "오르비", new Uri ( "https://orbi.kr" ) ),
 				new SimpleProcessor ( "인벤", new Uri ( "http://www.inven.co.kr" ) ),
 				new SimpleProcessor ( "클리앙", new Uri ( "http://www.clien.net" ) ),
@@ -52,6 +53,12 @@ namespace URLFinder.Processors
 				new SimpleProcessor ( "네이트판", new Uri ( "http://pann.nate.com" ) ),
 				new SimpleProcessor ( "보배드림", new Uri ( "http://www.bobaedream.co.kr" ) ),
 				new SimpleProcessor ( "게임조선", new Uri ( "http://www.gamechosun.co.kr" ) ),
+				new XpressEngineSimpleProcessor ( "에펨코리아", new Uri ( "http://www.fmkorea.com" ) ),
+				new XpressEngineSimpleProcessor ( "일간베스트저장소", new Uri ( "http://www.ilbe.com" ) ),
+				new XpressEngineSimpleProcessor ( "개드립넷", new Uri ( "http://www.dogdrip.net" ) ),
+				new XpressEngineSimpleProcessor ( "팟수넷", new Uri ( "http://potsu.net" ) ),
+				new Zeroboard4SimpleProcessor ( "츄잉", new Uri ( "http://www.chuing.net" ) ),
+				new Zeroboard4SimpleProcessor ( "뽐뿌", new Uri ( "http://www.ppomppu.co.kr" ) ),
 			} )
 			{
 				string host = processor.BaseUrl.Host;

@@ -1,37 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
+using System.Windows.Forms;
 using URLFinder.Utilities;
 
 namespace URLFinder
 {
-	/// <summary>
-	/// App.xaml에 대한 상호 작용 논리
-	/// </summary>
-	public partial class App : Application
+	static class Program
 	{
-		public App ()
+		/// <summary>
+		/// 해당 응용 프로그램의 주 진입점입니다.
+		/// </summary>
+		[STAThread]
+		static void Main ( string [] args )
 		{
-			//RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+			AppDomain.CurrentDomain.UnhandledException += ( object sender, UnhandledExceptionEventArgs e ) =>
+			{
+				FinderLog.Log ( $"알 수 없는 오류 발생: {( e.ExceptionObject as Exception ).Message}" );
+				FinderLog.Flush ();
+			};
+
+			if ( args.Length >= 1 && args [ 0 ] == "--startuputil" )
+					DoStartupUtility ( args );
+
+			Application.EnableVisualStyles ();
+			Application.SetCompatibleTextRenderingDefault ( false );
+			Application.Run ( new MainWindow () );
+
+			FinderLog.Flush ();
 		}
 
-		protected override void OnStartup ( StartupEventArgs e )
-		{
-			if ( e.Args.Length >= 1 && e.Args [ 0 ] == "--startuputil" )
-				DoStartupUtility ( e.Args );
-
-			base.OnStartup ( e );
-		}
-
-		private void DoStartupUtility ( string [] args )
+		private static void DoStartupUtility ( string [] args )
 		{
 			var now = DateTime.Now;
 			var path = $@"{CustomizedValue.WorkingDirectory}\{now.Year}\{now.Month:00}\{now.GetWeekOfMonth ()}주\모니터링일지-{CustomizedValue.WorkerName}-{now.ToString ( "yyMMdd" )}\";
@@ -64,7 +67,7 @@ namespace URLFinder
 					connection.Close ();
 				}
 			}
-			
+
 			Process.Start ( $"\"{hwpFilename}\"" );
 			Process.Start ( $"\"{excelFilename}\"" );
 
