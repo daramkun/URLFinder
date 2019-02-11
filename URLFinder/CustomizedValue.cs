@@ -17,9 +17,10 @@ namespace URLFinder
 
 		static CustomizedValue ()
 		{
-			if ( File.Exists ( SaveFilePath ) )
+			string path = Path.Combine ( Program.ProgramPath, SaveFilePath );
+			if ( File.Exists ( path ) )
 			{
-				string [] lines = File.ReadAllLines ( SaveFilePath );
+				string [] lines = File.ReadAllLines ( path );
 				WorkerName = lines [ 0 ];
 				WorkingDirectory = lines [ 1 ];
 				TemplateDirectory = lines [ 2 ];
@@ -28,7 +29,8 @@ namespace URLFinder
 
 		public static void Save ()
 		{
-			File.WriteAllLines ( SaveFilePath, new [] { WorkerName, WorkingDirectory, TemplateDirectory } );
+			string path = Path.Combine ( Program.ProgramPath, SaveFilePath );
+			File.WriteAllLines ( path, new [] { WorkerName, WorkingDirectory, TemplateDirectory } );
 		}
 	}
 }

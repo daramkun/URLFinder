@@ -137,7 +137,7 @@ namespace URLFinder.Finder
 
 			await Task.Run ( () =>
 			{
-				using ( LiteDatabase db = new LiteDatabase ( "Filename=ExcelFilesCache.litedb; Journal=true; Mode=Shared; Flush=true;" ) )
+				using ( LiteDatabase db = new LiteDatabase ( $"Filename=\"{Path.Combine ( Program.ProgramPath, "ExcelFilesCache.litedb" )}\"; Journal=true; Mode=Shared; Flush=true;" ) )
 				{
 					var cacheFilesCollection = db.GetCollection<CacheFiles> ( "cachefiles" );
 					var cachedItemsCollection = db.GetCollection<IndexedItem> ( "indexed" );

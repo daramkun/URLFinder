@@ -12,10 +12,10 @@ namespace URLFinder
 {
 	static class Program
 	{
-		/// <summary>
-		/// 해당 응용 프로그램의 주 진입점입니다.
-		/// </summary>
-		[STAThread]
+		public static string ProgramFilename => Process.GetCurrentProcess ().MainModule.FileName;
+		public static string ProgramPath => Path.GetDirectoryName ( ProgramFilename );
+
+		[ STAThread]
 		static void Main ( string [] args )
 		{
 			AppDomain.CurrentDomain.UnhandledException += ( object sender, UnhandledExceptionEventArgs e ) =>

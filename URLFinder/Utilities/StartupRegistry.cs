@@ -24,7 +24,7 @@ namespace URLFinder.Utilities
 		{
 			var runKey = Registry.CurrentUser.CreateSubKey ( "Software" ).CreateSubKey ( "Microsoft" )
 				.CreateSubKey ( "Windows" ).CreateSubKey ( "CurrentVersion" ).CreateSubKey ( "Run" );
-			runKey.SetValue ( "URLFinder", $"\"{Process.GetCurrentProcess ().MainModule.FileName}\" {( withStartupUtility ? "--startuputil" : "" )}" );
+			runKey.SetValue ( "URLFinder", $"\"{Program.ProgramFilename}\" {( withStartupUtility ? "--startuputil" : "" )}" );
 		}
 
 		public static void Unregister ()

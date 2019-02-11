@@ -319,7 +319,7 @@ namespace URLFinder
 		{
 			( sender as Button ).Enabled = false;
 
-			var date = monthCalendar.SelectionStart;
+			var date = DateTime.Now;
 			await Task.Run ( () =>
 			{
 				var archiveName = $"모니터링일지-{CustomizedValue.WorkerName}-{date.ToString ( "yyMMdd" )}";
