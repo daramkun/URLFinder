@@ -28,7 +28,7 @@ using System.Windows;
 //NeutralResourceLanguage 특성의 주석 처리를 제거합니다. 아래 줄의 "en-US"를 업데이트하여
 //프로젝트 파일의 UICulture 설정과 일치시킵니다.
 
-//[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
+[assembly: NeutralResourcesLanguage ( "ko-KR" )]
 
 // 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 //

@@ -14,10 +14,13 @@ namespace URLFinder
 	{
 		public static string ProgramFilename => Process.GetCurrentProcess ().MainModule.FileName;
 		public static string ProgramPath => Path.GetDirectoryName ( ProgramFilename );
+		public static bool ProcessRunning { get; private set; }
 
 		[ STAThread]
 		static void Main ( string [] args )
 		{
+			ProcessRunning = true;
+
 			AppDomain.CurrentDomain.UnhandledException += ( object sender, UnhandledExceptionEventArgs e ) =>
 			{
 				FinderLog.Log ( $"알 수 없는 오류 발생: {( e.ExceptionObject as Exception ).Message}" );
@@ -30,6 +33,8 @@ namespace URLFinder
 			Application.EnableVisualStyles ();
 			Application.SetCompatibleTextRenderingDefault ( false );
 			Application.Run ( new MainWindow () );
+
+			ProcessRunning = false;
 
 			FinderLog.Flush ();
 		}

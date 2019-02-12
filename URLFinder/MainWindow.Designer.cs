@@ -38,8 +38,8 @@
 			this.textBoxLineMerge = new System.Windows.Forms.TextBox();
 			this.tabPageSplitURLTitle = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanelSplit = new System.Windows.Forms.TableLayoutPanel();
-			this.textBoxSplittedSiteName = new System.Windows.Forms.TextBox();
 			this.textBoxSplittedBaseURL = new System.Windows.Forms.TextBox();
+			this.textBoxSplittedSiteName = new System.Windows.Forms.TextBox();
 			this.textBoxSplittedTitle = new System.Windows.Forms.TextBox();
 			this.buttonSplit = new System.Windows.Forms.Button();
 			this.textBoxBeforeSplit = new System.Windows.Forms.TextBox();
@@ -67,9 +67,9 @@
 			this.buttonManagementOpenFolder = new System.Windows.Forms.Button();
 			this.monthCalendar = new System.Windows.Forms.MonthCalendar();
 			this.tabPageSettings = new System.Windows.Forms.TabPage();
-			this.buttonRegisterStartProgram = new System.Windows.Forms.Button();
-			this.buttonRegisterStartProgramWithStartupUtility = new System.Windows.Forms.Button();
 			this.buttonUnregisterStartProgram = new System.Windows.Forms.Button();
+			this.buttonRegisterStartProgramWithStartupUtility = new System.Windows.Forms.Button();
+			this.buttonRegisterStartProgram = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabPageURLFind.SuspendLayout();
 			this.tabPageMergeLines.SuspendLayout();
@@ -164,7 +164,7 @@
 			this.tabPageMergeLines.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tabPageMergeLines.Name = "tabPageMergeLines";
 			this.tabPageMergeLines.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.tabPageMergeLines.Size = new System.Drawing.Size(590, 581);
+			this.tabPageMergeLines.Size = new System.Drawing.Size(589, 580);
 			this.tabPageMergeLines.TabIndex = 1;
 			this.tabPageMergeLines.Text = "줄 병합";
 			this.tabPageMergeLines.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
 			this.tabPageSplitURLTitle.Location = new System.Drawing.Point(4, 24);
 			this.tabPageSplitURLTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tabPageSplitURLTitle.Name = "tabPageSplitURLTitle";
-			this.tabPageSplitURLTitle.Size = new System.Drawing.Size(590, 581);
+			this.tabPageSplitURLTitle.Size = new System.Drawing.Size(589, 580);
 			this.tabPageSplitURLTitle.TabIndex = 2;
 			this.tabPageSplitURLTitle.Text = "URL/제목 분리";
 			this.tabPageSplitURLTitle.UseVisualStyleBackColor = true;
@@ -213,8 +213,8 @@
 			this.tableLayoutPanelSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanelSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
 			this.tableLayoutPanelSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanelSplit.Controls.Add(this.textBoxSplittedSiteName, 2, 3);
-			this.tableLayoutPanelSplit.Controls.Add(this.textBoxSplittedBaseURL, 2, 2);
+			this.tableLayoutPanelSplit.Controls.Add(this.textBoxSplittedBaseURL, 2, 3);
+			this.tableLayoutPanelSplit.Controls.Add(this.textBoxSplittedSiteName, 2, 2);
 			this.tableLayoutPanelSplit.Controls.Add(this.textBoxSplittedTitle, 2, 1);
 			this.tableLayoutPanelSplit.Controls.Add(this.buttonSplit, 1, 0);
 			this.tableLayoutPanelSplit.Controls.Add(this.textBoxBeforeSplit, 0, 0);
@@ -229,45 +229,45 @@
 			this.tableLayoutPanelSplit.Size = new System.Drawing.Size(578, 568);
 			this.tableLayoutPanelSplit.TabIndex = 0;
 			// 
-			// textBoxSplittedSiteName
-			// 
-			this.textBoxSplittedSiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSplittedSiteName.Location = new System.Drawing.Point(305, 423);
-			this.textBoxSplittedSiteName.Multiline = true;
-			this.textBoxSplittedSiteName.Name = "textBoxSplittedSiteName";
-			this.textBoxSplittedSiteName.ReadOnly = true;
-			this.textBoxSplittedSiteName.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxSplittedSiteName.Size = new System.Drawing.Size(264, 136);
-			this.textBoxSplittedSiteName.TabIndex = 5;
-			this.textBoxSplittedSiteName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
-			// 
 			// textBoxSplittedBaseURL
 			// 
 			this.textBoxSplittedBaseURL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSplittedBaseURL.Location = new System.Drawing.Point(305, 283);
+			this.textBoxSplittedBaseURL.Location = new System.Drawing.Point(305, 429);
 			this.textBoxSplittedBaseURL.Multiline = true;
 			this.textBoxSplittedBaseURL.Name = "textBoxSplittedBaseURL";
 			this.textBoxSplittedBaseURL.ReadOnly = true;
 			this.textBoxSplittedBaseURL.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxSplittedBaseURL.Size = new System.Drawing.Size(264, 134);
-			this.textBoxSplittedBaseURL.TabIndex = 4;
+			this.textBoxSplittedBaseURL.Size = new System.Drawing.Size(270, 136);
+			this.textBoxSplittedBaseURL.TabIndex = 5;
 			this.textBoxSplittedBaseURL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
+			// 
+			// textBoxSplittedSiteName
+			// 
+			this.textBoxSplittedSiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSplittedSiteName.Location = new System.Drawing.Point(305, 287);
+			this.textBoxSplittedSiteName.Multiline = true;
+			this.textBoxSplittedSiteName.Name = "textBoxSplittedSiteName";
+			this.textBoxSplittedSiteName.ReadOnly = true;
+			this.textBoxSplittedSiteName.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxSplittedSiteName.Size = new System.Drawing.Size(270, 136);
+			this.textBoxSplittedSiteName.TabIndex = 4;
+			this.textBoxSplittedSiteName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
 			// textBoxSplittedTitle
 			// 
 			this.textBoxSplittedTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSplittedTitle.Location = new System.Drawing.Point(305, 143);
+			this.textBoxSplittedTitle.Location = new System.Drawing.Point(305, 145);
 			this.textBoxSplittedTitle.Multiline = true;
 			this.textBoxSplittedTitle.Name = "textBoxSplittedTitle";
 			this.textBoxSplittedTitle.ReadOnly = true;
 			this.textBoxSplittedTitle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxSplittedTitle.Size = new System.Drawing.Size(264, 134);
+			this.textBoxSplittedTitle.Size = new System.Drawing.Size(270, 136);
 			this.textBoxSplittedTitle.TabIndex = 3;
 			this.textBoxSplittedTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
@@ -276,10 +276,10 @@
 			this.buttonSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSplit.Location = new System.Drawing.Point(273, 3);
+			this.buttonSplit.Location = new System.Drawing.Point(279, 3);
 			this.buttonSplit.Name = "buttonSplit";
 			this.tableLayoutPanelSplit.SetRowSpan(this.buttonSplit, 4);
-			this.buttonSplit.Size = new System.Drawing.Size(26, 556);
+			this.buttonSplit.Size = new System.Drawing.Size(20, 562);
 			this.buttonSplit.TabIndex = 0;
 			this.buttonSplit.Text = ">";
 			this.buttonSplit.UseVisualStyleBackColor = true;
@@ -295,7 +295,7 @@
 			this.textBoxBeforeSplit.Name = "textBoxBeforeSplit";
 			this.tableLayoutPanelSplit.SetRowSpan(this.textBoxBeforeSplit, 4);
 			this.textBoxBeforeSplit.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxBeforeSplit.Size = new System.Drawing.Size(264, 556);
+			this.textBoxBeforeSplit.Size = new System.Drawing.Size(270, 562);
 			this.textBoxBeforeSplit.TabIndex = 1;
 			// 
 			// textBoxSplittedURL
@@ -308,7 +308,7 @@
 			this.textBoxSplittedURL.Name = "textBoxSplittedURL";
 			this.textBoxSplittedURL.ReadOnly = true;
 			this.textBoxSplittedURL.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxSplittedURL.Size = new System.Drawing.Size(264, 134);
+			this.textBoxSplittedURL.Size = new System.Drawing.Size(270, 136);
 			this.textBoxSplittedURL.TabIndex = 2;
 			this.textBoxSplittedURL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
@@ -319,7 +319,7 @@
 			this.tabPageManagement.Location = new System.Drawing.Point(4, 24);
 			this.tabPageManagement.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tabPageManagement.Name = "tabPageManagement";
-			this.tabPageManagement.Size = new System.Drawing.Size(590, 581);
+			this.tabPageManagement.Size = new System.Drawing.Size(589, 580);
 			this.tabPageManagement.TabIndex = 3;
 			this.tabPageManagement.Text = "관리";
 			this.tabPageManagement.UseVisualStyleBackColor = true;
@@ -374,7 +374,7 @@
 			this.textBoxKeywordMonday.Multiline = true;
 			this.textBoxKeywordMonday.Name = "textBoxKeywordMonday";
 			this.textBoxKeywordMonday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordMonday.Size = new System.Drawing.Size(532, 274);
+			this.textBoxKeywordMonday.Size = new System.Drawing.Size(532, 276);
 			this.textBoxKeywordMonday.TabIndex = 0;
 			// 
 			// tabPageTuesdayKeywords
@@ -397,7 +397,7 @@
 			this.textBoxKeywordTuesday.Multiline = true;
 			this.textBoxKeywordTuesday.Name = "textBoxKeywordTuesday";
 			this.textBoxKeywordTuesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(532, 278);
+			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(532, 280);
 			this.textBoxKeywordTuesday.TabIndex = 1;
 			// 
 			// tabPageWednesdayKeywords
@@ -419,7 +419,7 @@
 			this.textBoxKeywordWednesday.Multiline = true;
 			this.textBoxKeywordWednesday.Name = "textBoxKeywordWednesday";
 			this.textBoxKeywordWednesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(532, 278);
+			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(532, 280);
 			this.textBoxKeywordWednesday.TabIndex = 1;
 			// 
 			// tabPageThursdayKeywords
@@ -441,7 +441,7 @@
 			this.textBoxKeywordThursday.Multiline = true;
 			this.textBoxKeywordThursday.Name = "textBoxKeywordThursday";
 			this.textBoxKeywordThursday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordThursday.Size = new System.Drawing.Size(532, 278);
+			this.textBoxKeywordThursday.Size = new System.Drawing.Size(532, 280);
 			this.textBoxKeywordThursday.TabIndex = 1;
 			// 
 			// tabPageFridayKeywords
@@ -463,7 +463,7 @@
 			this.textBoxKeywordFriday.Multiline = true;
 			this.textBoxKeywordFriday.Name = "textBoxKeywordFriday";
 			this.textBoxKeywordFriday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordFriday.Size = new System.Drawing.Size(532, 278);
+			this.textBoxKeywordFriday.Size = new System.Drawing.Size(532, 280);
 			this.textBoxKeywordFriday.TabIndex = 1;
 			// 
 			// tabPageAdditionalKeywords
@@ -485,7 +485,7 @@
 			this.textBoxKeywordAdditional.Multiline = true;
 			this.textBoxKeywordAdditional.Name = "textBoxKeywordAdditional";
 			this.textBoxKeywordAdditional.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(532, 278);
+			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(532, 280);
 			this.textBoxKeywordAdditional.TabIndex = 1;
 			// 
 			// groupBoxManagementByDate
@@ -567,9 +567,8 @@
 			// 
 			// monthCalendar
 			// 
-			this.monthCalendar.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
 			this.monthCalendar.Location = new System.Drawing.Point(12, 28);
-			this.monthCalendar.MaxDate = new System.DateTime(2019, 2, 1, 0, 0, 0, 0);
+			this.monthCalendar.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
 			this.monthCalendar.MaxSelectionCount = 1;
 			this.monthCalendar.MinDate = new System.DateTime(2018, 1, 2, 0, 0, 0, 0);
 			this.monthCalendar.Name = "monthCalendar";
@@ -588,17 +587,17 @@
 			this.tabPageSettings.Text = "설정";
 			this.tabPageSettings.UseVisualStyleBackColor = true;
 			// 
-			// buttonRegisterStartProgram
+			// buttonUnregisterStartProgram
 			// 
-			this.buttonRegisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonUnregisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonRegisterStartProgram.Location = new System.Drawing.Point(8, 7);
-			this.buttonRegisterStartProgram.Name = "buttonRegisterStartProgram";
-			this.buttonRegisterStartProgram.Size = new System.Drawing.Size(571, 23);
-			this.buttonRegisterStartProgram.TabIndex = 0;
-			this.buttonRegisterStartProgram.Text = "시작 프로그램으로 등록";
-			this.buttonRegisterStartProgram.UseVisualStyleBackColor = true;
-			this.buttonRegisterStartProgram.Click += new System.EventHandler(this.ButtonRegisterStartProgram_Click);
+			this.buttonUnregisterStartProgram.Location = new System.Drawing.Point(8, 65);
+			this.buttonUnregisterStartProgram.Name = "buttonUnregisterStartProgram";
+			this.buttonUnregisterStartProgram.Size = new System.Drawing.Size(571, 23);
+			this.buttonUnregisterStartProgram.TabIndex = 2;
+			this.buttonUnregisterStartProgram.Text = "시작 프로그램 등록 해제";
+			this.buttonUnregisterStartProgram.UseVisualStyleBackColor = true;
+			this.buttonUnregisterStartProgram.Click += new System.EventHandler(this.ButtonUnregisterStartProgram_Click);
 			// 
 			// buttonRegisterStartProgramWithStartupUtility
 			// 
@@ -612,17 +611,17 @@
 			this.buttonRegisterStartProgramWithStartupUtility.UseVisualStyleBackColor = true;
 			this.buttonRegisterStartProgramWithStartupUtility.Click += new System.EventHandler(this.ButtonRegisterStartProgramWithStartupUtility_Click);
 			// 
-			// buttonUnregisterStartProgramWithStartupUtility
+			// buttonRegisterStartProgram
 			// 
-			this.buttonUnregisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonRegisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonUnregisterStartProgram.Location = new System.Drawing.Point(8, 65);
-			this.buttonUnregisterStartProgram.Name = "buttonUnregisterStartProgramWithStartupUtility";
-			this.buttonUnregisterStartProgram.Size = new System.Drawing.Size(571, 23);
-			this.buttonUnregisterStartProgram.TabIndex = 2;
-			this.buttonUnregisterStartProgram.Text = "시작 프로그램 등록 해제";
-			this.buttonUnregisterStartProgram.UseVisualStyleBackColor = true;
-			this.buttonUnregisterStartProgram.Click += new System.EventHandler(this.ButtonUnregisterStartProgram_Click);
+			this.buttonRegisterStartProgram.Location = new System.Drawing.Point(8, 7);
+			this.buttonRegisterStartProgram.Name = "buttonRegisterStartProgram";
+			this.buttonRegisterStartProgram.Size = new System.Drawing.Size(571, 23);
+			this.buttonRegisterStartProgram.TabIndex = 0;
+			this.buttonRegisterStartProgram.Text = "시작 프로그램으로 등록";
+			this.buttonRegisterStartProgram.UseVisualStyleBackColor = true;
+			this.buttonRegisterStartProgram.Click += new System.EventHandler(this.ButtonRegisterStartProgram_Click);
 			// 
 			// MainWindow
 			// 
@@ -684,8 +683,8 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSplit;
 		private System.Windows.Forms.Button buttonSplit;
 		private System.Windows.Forms.TextBox textBoxBeforeSplit;
-		private System.Windows.Forms.TextBox textBoxSplittedSiteName;
 		private System.Windows.Forms.TextBox textBoxSplittedBaseURL;
+		private System.Windows.Forms.TextBox textBoxSplittedSiteName;
 		private System.Windows.Forms.TextBox textBoxSplittedTitle;
 		private System.Windows.Forms.TextBox textBoxSplittedURL;
 		private System.Windows.Forms.MonthCalendar monthCalendar;

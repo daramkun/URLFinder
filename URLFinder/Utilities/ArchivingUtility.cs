@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace URLFinder.Utilities
 	{
 		public static void ArchivePdfs ( string target, params string [] pdfPaths )
 		{
+			Directory.CreateDirectory ( Path.Combine ( Program.ProgramPath, "PdfTemp" ) );
 			using ( Stream fs = new FileStream ( target, FileMode.Create ) )
 			{
 				using ( ZipArchive archive = new ZipArchive ( fs, ZipArchiveMode.Create ) )
@@ -21,10 +23,19 @@ namespace URLFinder.Utilities
 						var entry = archive.CreateEntry ( Path.GetFileName ( pdfPath ), CompressionLevel.Optimal );
 						using ( Stream entryStream = entry.Open () )
 						{
-							using ( Stream pdfStream = new FileStream ( pdfPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite ) )
+							string newPdfPath = Path.Combine ( Program.ProgramPath, "PdfTemp", Path.GetFileNameWithoutExtension ( pdfPath ) + "compression.pdf" );
+							Process.Start ( new ProcessStartInfo ( "GhostScript/gswin32c.exe", $"-sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=\"{newPdfPath}\" \"{pdfPath}\"" )
+							{
+								UseShellExecute = false,
+								CreateNoWindow = true,
+							} ).WaitForExit ();
+
+							using ( Stream pdfStream = new FileStream ( newPdfPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite ) )
 							{
 								pdfStream.CopyTo ( entryStream );
 							}
+
+							//File.Delete ( newPdfPath );
 						}
 					}
 				}

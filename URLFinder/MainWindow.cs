@@ -21,12 +21,16 @@ namespace URLFinder
 {
 	public partial class MainWindow : Form
 	{
+		public static MainWindow SharedWindow { get; private set; }
+
 		readonly Thread uiThread;
 
 		ExcelIndexer indexer;
 
 		public MainWindow ()
 		{
+			SharedWindow = this;
+
 			uiThread = Thread.CurrentThread;
 
 			InitializeComponent ();
@@ -81,27 +85,30 @@ namespace URLFinder
 						Invoke ( new Action ( () =>
 						{
 							initializeItem.Text = $"[초기화중][검색자 초기화 수행 중][{builderState.TotalItemCount}개 찾음][{builderState.ExcelFileCount}개 엑셀 파일 인덱싱 됨]";
-							while ( builderState.OpeningFailedFiles.TryDequeue ( out string file ) )
-								Log ( $"[오류발생]{Path.GetFileName ( file )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon, initializeItem );
+							while ( builderState.OpeningFailedFiles.TryDequeue ( out string filename ) )
+								Log ( $"[오류발생]{Path.GetFileName ( filename )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon, initializeItem );
 						} ) );
 						break;
 					}
 
-					Invoke ( new Action ( () =>
+					if ( lastCount != builderState.TotalItemCount )
 					{
-						if ( lastCount != builderState.TotalItemCount )
+						lastCount = builderState.TotalItemCount;
+						Invoke ( new Action ( () =>
 						{
-							lastCount = builderState.TotalItemCount;
 							initializeItem.Text = $"[초기화중][검색자 초기화 수행 중][{lastCount}개 찾음][{builderState.ExcelFileCount}개 엑셀 파일 인덱싱 됨]";
-						}
+						} ) );
+					}
 
-						if ( builderState.OpeningFailedFiles.TryDequeue ( out string file ) )
+					while ( builderState.OpeningFailedFiles.TryDequeue ( out string file ) )
+					{
+						Invoke ( new Action ( () =>
 						{
 							Log ( $"[오류발생]{Path.GetFileName ( file )} - 파일에 접근할 수 없거나 잘못된 엑셀 파일임.", Color.LightSalmon, initializeItem );
-						}
-					} ) );
+						} ) );
+					}
 
-					Thread.Sleep ( 100 );
+					Thread.Sleep ( 300 );
 				}
 			} );
 			counter.Start ();
@@ -266,8 +273,8 @@ namespace URLFinder
 
 			textBoxSplittedURL.Text = urlList.ToString ();
 			textBoxSplittedTitle.Text = titleList.ToString ();
-			textBoxSplittedSiteName.Text = webSiteList.ToString ();
-			textBoxSplittedBaseURL.Text = managedUrlList.ToString ();
+			textBoxSplittedBaseURL.Text = webSiteList.ToString ();
+			textBoxSplittedSiteName.Text = managedUrlList.ToString ();
 		}
 
 		private void MonthCalendar_DateSelected ( object sender, DateRangeEventArgs e )
@@ -278,7 +285,7 @@ namespace URLFinder
 				buttonManagementOpenHWP.Enabled =
 				buttonManagementOpenXLSX.Enabled =
 				buttonManagementOpenPDFs.Enabled = enabled;
-			buttonManagementArchiving.Enabled = e.Start.Date == DateTime.Today;
+			buttonManagementArchiving.Enabled = e.Start.Date == DateTime.Today.Date;
 		}
 
 		private void ButtonManagementOpenFolder_Click ( object sender, EventArgs e )
