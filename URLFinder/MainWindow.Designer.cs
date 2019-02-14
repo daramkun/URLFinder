@@ -32,7 +32,6 @@
 			this.tabPageURLFind = new System.Windows.Forms.TabPage();
 			this.treeViewLog = new System.Windows.Forms.TreeView();
 			this.buttonSearch = new System.Windows.Forms.Button();
-			this.textBoxSearch = new URLFinder.Controls.PasteDetectableTextBox();
 			this.tabPageMergeLines = new System.Windows.Forms.TabPage();
 			this.buttonMergedCopy = new System.Windows.Forms.Button();
 			this.textBoxLineMerge = new System.Windows.Forms.TextBox();
@@ -45,6 +44,10 @@
 			this.textBoxBeforeSplit = new System.Windows.Forms.TextBox();
 			this.textBoxSplittedURL = new System.Windows.Forms.TextBox();
 			this.tabPageManagement = new System.Windows.Forms.TabPage();
+			this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+			this.buttonUnregisterStartProgram = new System.Windows.Forms.Button();
+			this.buttonRegisterStartProgramWithStartupUtility = new System.Windows.Forms.Button();
+			this.buttonRegisterStartProgram = new System.Windows.Forms.Button();
 			this.groupBoxKeywords = new System.Windows.Forms.GroupBox();
 			this.tabControlKeywords = new System.Windows.Forms.TabControl();
 			this.tabPageMondayKeywords = new System.Windows.Forms.TabPage();
@@ -66,16 +69,15 @@
 			this.buttonManagementOpenHWP = new System.Windows.Forms.Button();
 			this.buttonManagementOpenFolder = new System.Windows.Forms.Button();
 			this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-			this.tabPageSettings = new System.Windows.Forms.TabPage();
-			this.buttonUnregisterStartProgram = new System.Windows.Forms.Button();
-			this.buttonRegisterStartProgramWithStartupUtility = new System.Windows.Forms.Button();
-			this.buttonRegisterStartProgram = new System.Windows.Forms.Button();
+			this.textBoxSearch = new URLFinder.Controls.PasteDetectableTextBox();
+			this.clipboardAutomator = new URLFinder.Controls.ClipboardAutomator();
 			this.tabControl.SuspendLayout();
 			this.tabPageURLFind.SuspendLayout();
 			this.tabPageMergeLines.SuspendLayout();
 			this.tabPageSplitURLTitle.SuspendLayout();
 			this.tableLayoutPanelSplit.SuspendLayout();
 			this.tabPageManagement.SuspendLayout();
+			this.groupBoxSettings.SuspendLayout();
 			this.groupBoxKeywords.SuspendLayout();
 			this.tabControlKeywords.SuspendLayout();
 			this.tabPageMondayKeywords.SuspendLayout();
@@ -85,7 +87,6 @@
 			this.tabPageFridayKeywords.SuspendLayout();
 			this.tabPageAdditionalKeywords.SuspendLayout();
 			this.groupBoxManagementByDate.SuspendLayout();
-			this.tabPageSettings.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -97,7 +98,6 @@
 			this.tabControl.Controls.Add(this.tabPageMergeLines);
 			this.tabControl.Controls.Add(this.tabPageSplitURLTitle);
 			this.tabControl.Controls.Add(this.tabPageManagement);
-			this.tabControl.Controls.Add(this.tabPageSettings);
 			this.tabControl.Enabled = false;
 			this.tabControl.HotTrack = true;
 			this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -131,7 +131,7 @@
 			this.treeViewLog.Location = new System.Drawing.Point(8, 36);
 			this.treeViewLog.Name = "treeViewLog";
 			this.treeViewLog.ShowRootLines = false;
-			this.treeViewLog.Size = new System.Drawing.Size(571, 534);
+			this.treeViewLog.Size = new System.Drawing.Size(571, 528);
 			this.treeViewLog.TabIndex = 2;
 			// 
 			// buttonSearch
@@ -144,17 +144,6 @@
 			this.buttonSearch.Text = "검색";
 			this.buttonSearch.UseVisualStyleBackColor = true;
 			this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
-			// 
-			// textBoxSearch
-			// 
-			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSearch.Location = new System.Drawing.Point(8, 7);
-			this.textBoxSearch.Name = "textBoxSearch";
-			this.textBoxSearch.Size = new System.Drawing.Size(490, 23);
-			this.textBoxSearch.TabIndex = 0;
-			this.textBoxSearch.Pasted += new System.EventHandler(this.TextBoxSearch_Pasted);
-			this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
 			// tabPageMergeLines
 			// 
@@ -314,6 +303,7 @@
 			// 
 			// tabPageManagement
 			// 
+			this.tabPageManagement.Controls.Add(this.groupBoxSettings);
 			this.tabPageManagement.Controls.Add(this.groupBoxKeywords);
 			this.tabPageManagement.Controls.Add(this.groupBoxManagementByDate);
 			this.tabPageManagement.Location = new System.Drawing.Point(4, 24);
@@ -324,6 +314,54 @@
 			this.tabPageManagement.Text = "관리";
 			this.tabPageManagement.UseVisualStyleBackColor = true;
 			// 
+			// groupBoxSettings
+			// 
+			this.groupBoxSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxSettings.Controls.Add(this.clipboardAutomator);
+			this.groupBoxSettings.Controls.Add(this.buttonUnregisterStartProgram);
+			this.groupBoxSettings.Controls.Add(this.buttonRegisterStartProgramWithStartupUtility);
+			this.groupBoxSettings.Controls.Add(this.buttonRegisterStartProgram);
+			this.groupBoxSettings.Location = new System.Drawing.Point(353, 237);
+			this.groupBoxSettings.Name = "groupBoxSettings";
+			this.groupBoxSettings.Size = new System.Drawing.Size(227, 334);
+			this.groupBoxSettings.TabIndex = 3;
+			this.groupBoxSettings.TabStop = false;
+			this.groupBoxSettings.Text = "설정";
+			// 
+			// buttonUnregisterStartProgram
+			// 
+			this.buttonUnregisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonUnregisterStartProgram.Location = new System.Drawing.Point(12, 80);
+			this.buttonUnregisterStartProgram.Name = "buttonUnregisterStartProgram";
+			this.buttonUnregisterStartProgram.Size = new System.Drawing.Size(199, 23);
+			this.buttonUnregisterStartProgram.TabIndex = 5;
+			this.buttonUnregisterStartProgram.Text = "시작 프로그램 등록 해제";
+			this.buttonUnregisterStartProgram.UseVisualStyleBackColor = true;
+			// 
+			// buttonRegisterStartProgramWithStartupUtility
+			// 
+			this.buttonRegisterStartProgramWithStartupUtility.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonRegisterStartProgramWithStartupUtility.Location = new System.Drawing.Point(12, 51);
+			this.buttonRegisterStartProgramWithStartupUtility.Name = "buttonRegisterStartProgramWithStartupUtility";
+			this.buttonRegisterStartProgramWithStartupUtility.Size = new System.Drawing.Size(199, 23);
+			this.buttonRegisterStartProgramWithStartupUtility.TabIndex = 4;
+			this.buttonRegisterStartProgramWithStartupUtility.Text = "작업 준비 가동 시작 프로그램 등록";
+			this.buttonRegisterStartProgramWithStartupUtility.UseVisualStyleBackColor = true;
+			// 
+			// buttonRegisterStartProgram
+			// 
+			this.buttonRegisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonRegisterStartProgram.Location = new System.Drawing.Point(12, 22);
+			this.buttonRegisterStartProgram.Name = "buttonRegisterStartProgram";
+			this.buttonRegisterStartProgram.Size = new System.Drawing.Size(199, 23);
+			this.buttonRegisterStartProgram.TabIndex = 3;
+			this.buttonRegisterStartProgram.Text = "시작 프로그램 등록";
+			this.buttonRegisterStartProgram.UseVisualStyleBackColor = true;
+			// 
 			// groupBoxKeywords
 			// 
 			this.groupBoxKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -332,7 +370,7 @@
 			this.groupBoxKeywords.Controls.Add(this.tabControlKeywords);
 			this.groupBoxKeywords.Location = new System.Drawing.Point(8, 237);
 			this.groupBoxKeywords.Name = "groupBoxKeywords";
-			this.groupBoxKeywords.Size = new System.Drawing.Size(572, 334);
+			this.groupBoxKeywords.Size = new System.Drawing.Size(339, 334);
 			this.groupBoxKeywords.TabIndex = 2;
 			this.groupBoxKeywords.TabStop = false;
 			this.groupBoxKeywords.Text = "검색어 관리";
@@ -351,7 +389,7 @@
 			this.tabControlKeywords.Location = new System.Drawing.Point(12, 22);
 			this.tabControlKeywords.Name = "tabControlKeywords";
 			this.tabControlKeywords.SelectedIndex = 0;
-			this.tabControlKeywords.Size = new System.Drawing.Size(552, 300);
+			this.tabControlKeywords.Size = new System.Drawing.Size(319, 300);
 			this.tabControlKeywords.TabIndex = 0;
 			// 
 			// tabPageMondayKeywords
@@ -360,7 +398,7 @@
 			this.tabPageMondayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageMondayKeywords.Name = "tabPageMondayKeywords";
 			this.tabPageMondayKeywords.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageMondayKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageMondayKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageMondayKeywords.TabIndex = 0;
 			this.tabPageMondayKeywords.Text = "월";
 			this.tabPageMondayKeywords.UseVisualStyleBackColor = true;
@@ -374,7 +412,7 @@
 			this.textBoxKeywordMonday.Multiline = true;
 			this.textBoxKeywordMonday.Name = "textBoxKeywordMonday";
 			this.textBoxKeywordMonday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordMonday.Size = new System.Drawing.Size(532, 276);
+			this.textBoxKeywordMonday.Size = new System.Drawing.Size(299, 258);
 			this.textBoxKeywordMonday.TabIndex = 0;
 			// 
 			// tabPageTuesdayKeywords
@@ -383,7 +421,7 @@
 			this.tabPageTuesdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageTuesdayKeywords.Name = "tabPageTuesdayKeywords";
 			this.tabPageTuesdayKeywords.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageTuesdayKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageTuesdayKeywords.Size = new System.Drawing.Size(312, 272);
 			this.tabPageTuesdayKeywords.TabIndex = 1;
 			this.tabPageTuesdayKeywords.Text = "화";
 			this.tabPageTuesdayKeywords.UseVisualStyleBackColor = true;
@@ -397,7 +435,7 @@
 			this.textBoxKeywordTuesday.Multiline = true;
 			this.textBoxKeywordTuesday.Name = "textBoxKeywordTuesday";
 			this.textBoxKeywordTuesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(532, 280);
+			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(300, 264);
 			this.textBoxKeywordTuesday.TabIndex = 1;
 			// 
 			// tabPageWednesdayKeywords
@@ -405,7 +443,7 @@
 			this.tabPageWednesdayKeywords.Controls.Add(this.textBoxKeywordWednesday);
 			this.tabPageWednesdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageWednesdayKeywords.Name = "tabPageWednesdayKeywords";
-			this.tabPageWednesdayKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageWednesdayKeywords.Size = new System.Drawing.Size(312, 272);
 			this.tabPageWednesdayKeywords.TabIndex = 2;
 			this.tabPageWednesdayKeywords.Text = "수";
 			this.tabPageWednesdayKeywords.UseVisualStyleBackColor = true;
@@ -419,7 +457,7 @@
 			this.textBoxKeywordWednesday.Multiline = true;
 			this.textBoxKeywordWednesday.Name = "textBoxKeywordWednesday";
 			this.textBoxKeywordWednesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(532, 280);
+			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(300, 264);
 			this.textBoxKeywordWednesday.TabIndex = 1;
 			// 
 			// tabPageThursdayKeywords
@@ -427,7 +465,7 @@
 			this.tabPageThursdayKeywords.Controls.Add(this.textBoxKeywordThursday);
 			this.tabPageThursdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageThursdayKeywords.Name = "tabPageThursdayKeywords";
-			this.tabPageThursdayKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageThursdayKeywords.Size = new System.Drawing.Size(312, 272);
 			this.tabPageThursdayKeywords.TabIndex = 3;
 			this.tabPageThursdayKeywords.Text = "목";
 			this.tabPageThursdayKeywords.UseVisualStyleBackColor = true;
@@ -441,7 +479,7 @@
 			this.textBoxKeywordThursday.Multiline = true;
 			this.textBoxKeywordThursday.Name = "textBoxKeywordThursday";
 			this.textBoxKeywordThursday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordThursday.Size = new System.Drawing.Size(532, 280);
+			this.textBoxKeywordThursday.Size = new System.Drawing.Size(300, 264);
 			this.textBoxKeywordThursday.TabIndex = 1;
 			// 
 			// tabPageFridayKeywords
@@ -449,7 +487,7 @@
 			this.tabPageFridayKeywords.Controls.Add(this.textBoxKeywordFriday);
 			this.tabPageFridayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageFridayKeywords.Name = "tabPageFridayKeywords";
-			this.tabPageFridayKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageFridayKeywords.Size = new System.Drawing.Size(312, 272);
 			this.tabPageFridayKeywords.TabIndex = 4;
 			this.tabPageFridayKeywords.Text = "금";
 			this.tabPageFridayKeywords.UseVisualStyleBackColor = true;
@@ -463,7 +501,7 @@
 			this.textBoxKeywordFriday.Multiline = true;
 			this.textBoxKeywordFriday.Name = "textBoxKeywordFriday";
 			this.textBoxKeywordFriday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordFriday.Size = new System.Drawing.Size(532, 280);
+			this.textBoxKeywordFriday.Size = new System.Drawing.Size(300, 264);
 			this.textBoxKeywordFriday.TabIndex = 1;
 			// 
 			// tabPageAdditionalKeywords
@@ -471,7 +509,7 @@
 			this.tabPageAdditionalKeywords.Controls.Add(this.textBoxKeywordAdditional);
 			this.tabPageAdditionalKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageAdditionalKeywords.Name = "tabPageAdditionalKeywords";
-			this.tabPageAdditionalKeywords.Size = new System.Drawing.Size(544, 272);
+			this.tabPageAdditionalKeywords.Size = new System.Drawing.Size(312, 272);
 			this.tabPageAdditionalKeywords.TabIndex = 5;
 			this.tabPageAdditionalKeywords.Text = "추가 검색어";
 			this.tabPageAdditionalKeywords.UseVisualStyleBackColor = true;
@@ -485,7 +523,7 @@
 			this.textBoxKeywordAdditional.Multiline = true;
 			this.textBoxKeywordAdditional.Name = "textBoxKeywordAdditional";
 			this.textBoxKeywordAdditional.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(532, 280);
+			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(300, 264);
 			this.textBoxKeywordAdditional.TabIndex = 1;
 			// 
 			// groupBoxManagementByDate
@@ -568,60 +606,31 @@
 			// monthCalendar
 			// 
 			this.monthCalendar.Location = new System.Drawing.Point(12, 28);
-			this.monthCalendar.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
 			this.monthCalendar.MaxSelectionCount = 1;
 			this.monthCalendar.MinDate = new System.DateTime(2018, 1, 2, 0, 0, 0, 0);
 			this.monthCalendar.Name = "monthCalendar";
 			this.monthCalendar.TabIndex = 0;
 			this.monthCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar_DateSelected);
 			// 
-			// tabPageSettings
+			// textBoxSearch
 			// 
-			this.tabPageSettings.Controls.Add(this.buttonUnregisterStartProgram);
-			this.tabPageSettings.Controls.Add(this.buttonRegisterStartProgramWithStartupUtility);
-			this.tabPageSettings.Controls.Add(this.buttonRegisterStartProgram);
-			this.tabPageSettings.Location = new System.Drawing.Point(4, 24);
-			this.tabPageSettings.Name = "tabPageSettings";
-			this.tabPageSettings.Size = new System.Drawing.Size(589, 580);
-			this.tabPageSettings.TabIndex = 4;
-			this.tabPageSettings.Text = "설정";
-			this.tabPageSettings.UseVisualStyleBackColor = true;
-			// 
-			// buttonUnregisterStartProgram
-			// 
-			this.buttonUnregisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonUnregisterStartProgram.Location = new System.Drawing.Point(8, 65);
-			this.buttonUnregisterStartProgram.Name = "buttonUnregisterStartProgram";
-			this.buttonUnregisterStartProgram.Size = new System.Drawing.Size(571, 23);
-			this.buttonUnregisterStartProgram.TabIndex = 2;
-			this.buttonUnregisterStartProgram.Text = "시작 프로그램 등록 해제";
-			this.buttonUnregisterStartProgram.UseVisualStyleBackColor = true;
-			this.buttonUnregisterStartProgram.Click += new System.EventHandler(this.ButtonUnregisterStartProgram_Click);
+			this.textBoxSearch.Location = new System.Drawing.Point(8, 7);
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.Size = new System.Drawing.Size(490, 23);
+			this.textBoxSearch.TabIndex = 0;
+			this.textBoxSearch.Pasted += new System.EventHandler(this.TextBoxSearch_Pasted);
+			this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
-			// buttonRegisterStartProgramWithStartupUtility
+			// clipboardAutomator
 			// 
-			this.buttonRegisterStartProgramWithStartupUtility.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.clipboardAutomator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonRegisterStartProgramWithStartupUtility.Location = new System.Drawing.Point(8, 36);
-			this.buttonRegisterStartProgramWithStartupUtility.Name = "buttonRegisterStartProgramWithStartupUtility";
-			this.buttonRegisterStartProgramWithStartupUtility.Size = new System.Drawing.Size(571, 23);
-			this.buttonRegisterStartProgramWithStartupUtility.TabIndex = 1;
-			this.buttonRegisterStartProgramWithStartupUtility.Text = "시작 프로그램으로 등록 (시작 유틸리티 실행)";
-			this.buttonRegisterStartProgramWithStartupUtility.UseVisualStyleBackColor = true;
-			this.buttonRegisterStartProgramWithStartupUtility.Click += new System.EventHandler(this.ButtonRegisterStartProgramWithStartupUtility_Click);
-			// 
-			// buttonRegisterStartProgram
-			// 
-			this.buttonRegisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonRegisterStartProgram.Location = new System.Drawing.Point(8, 7);
-			this.buttonRegisterStartProgram.Name = "buttonRegisterStartProgram";
-			this.buttonRegisterStartProgram.Size = new System.Drawing.Size(571, 23);
-			this.buttonRegisterStartProgram.TabIndex = 0;
-			this.buttonRegisterStartProgram.Text = "시작 프로그램으로 등록";
-			this.buttonRegisterStartProgram.UseVisualStyleBackColor = true;
-			this.buttonRegisterStartProgram.Click += new System.EventHandler(this.ButtonRegisterStartProgram_Click);
+			this.clipboardAutomator.Location = new System.Drawing.Point(11, 109);
+			this.clipboardAutomator.Name = "clipboardAutomator";
+			this.clipboardAutomator.Size = new System.Drawing.Size(200, 100);
+			this.clipboardAutomator.TabIndex = 6;
 			// 
 			// MainWindow
 			// 
@@ -648,6 +657,7 @@
 			this.tableLayoutPanelSplit.ResumeLayout(false);
 			this.tableLayoutPanelSplit.PerformLayout();
 			this.tabPageManagement.ResumeLayout(false);
+			this.groupBoxSettings.ResumeLayout(false);
 			this.groupBoxKeywords.ResumeLayout(false);
 			this.tabControlKeywords.ResumeLayout(false);
 			this.tabPageMondayKeywords.ResumeLayout(false);
@@ -663,7 +673,6 @@
 			this.tabPageAdditionalKeywords.ResumeLayout(false);
 			this.tabPageAdditionalKeywords.PerformLayout();
 			this.groupBoxManagementByDate.ResumeLayout(false);
-			this.tabPageSettings.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -708,10 +717,11 @@
 		private System.Windows.Forms.TextBox textBoxKeywordThursday;
 		private System.Windows.Forms.TextBox textBoxKeywordFriday;
 		private System.Windows.Forms.TextBox textBoxKeywordAdditional;
-		private System.Windows.Forms.TabPage tabPageSettings;
-		private System.Windows.Forms.Button buttonRegisterStartProgram;
-		private System.Windows.Forms.Button buttonRegisterStartProgramWithStartupUtility;
+		private System.Windows.Forms.GroupBox groupBoxSettings;
 		private System.Windows.Forms.Button buttonUnregisterStartProgram;
+		private System.Windows.Forms.Button buttonRegisterStartProgramWithStartupUtility;
+		private System.Windows.Forms.Button buttonRegisterStartProgram;
+		private URLFinder.Controls.ClipboardAutomator clipboardAutomator;
 	}
 }
 

@@ -35,7 +35,7 @@ namespace URLFinder.Utilities
 								pdfStream.CopyTo ( entryStream );
 							}
 
-							//File.Delete ( newPdfPath );
+							File.Delete ( newPdfPath );
 						}
 					}
 				}

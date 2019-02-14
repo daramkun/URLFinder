@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ClipboardAutomator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ClipboardAutomator.Designer.cs">
+      <DependentUpon>ClipboardAutomator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PasteDetectableTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     <Compile Include="Utilities\FilesEnumerator.cs" />
     <Compile Include="Utilities\FinderLog.cs" />
     <Compile Include="Utilities\StartupRegistry.cs" />
+    <EmbeddedResource Include="Controls\ClipboardAutomator.resx">
+      <DependentUpon>ClipboardAutomator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

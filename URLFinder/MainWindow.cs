@@ -273,8 +273,8 @@ namespace URLFinder
 
 			textBoxSplittedURL.Text = urlList.ToString ();
 			textBoxSplittedTitle.Text = titleList.ToString ();
-			textBoxSplittedBaseURL.Text = webSiteList.ToString ();
-			textBoxSplittedSiteName.Text = managedUrlList.ToString ();
+			textBoxSplittedSiteName.Text = webSiteList.ToString ();
+			textBoxSplittedBaseURL.Text = managedUrlList.ToString ();
 		}
 
 		private void MonthCalendar_DateSelected ( object sender, DateRangeEventArgs e )
