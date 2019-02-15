@@ -56,6 +56,11 @@ namespace URLFinder.Controls
 				if ( !( e.DataObject.GetData ( "Text" ) is string text ) )
 					return;
 
+				text = text.Trim ();
+
+				text = Regex.Replace ( text, "(\\[출처\\] .* \\(.*\\) \\|작성자 .*)$", "" );
+				text = Regex.Replace ( text, "(\\[출처\\] .*\n\\[링크\\] .*)$", "" );
+
 				if ( checkBoxLineMerger.Checked )
 				{
 					if ( text.IndexOf ( '\n' ) >= 0 )
