@@ -145,7 +145,7 @@ namespace URLFinder.Finder
 					var newFile = new ConcurrentQueue<CacheFiles> ();
 					var newRecord = new ConcurrentQueue<IndexedItem> ();
 
-					Parallel.ForEach ( FilesEnumerator.EnumerateFiles ( CustomizedValue.WorkingDirectory, "엑셀자료-*.xlsx", false ), ( file ) =>
+					Parallel.ForEach ( FilesEnumerator.EnumerateFiles ( CustomizedValue.WorkingDirectory, "엑셀자료-*.xlsx", false ).AsParallel (), ( file ) =>
 					{
 						if ( file.Contains ( "일지 양식" ) || file.Contains ( "샘플" ) || Regex.IsMatch ( file, todayRegexString ) )
 							return;
@@ -239,7 +239,6 @@ namespace URLFinder.Finder
 					List<DateTime> dates = new List<DateTime> ();
 					foreach ( var f in cacheFilesCollection.FindAll () )
 					{
-
 						string date = "20" + Regex.Match ( f.Filename, $"(.*)모니터링일지-[가-힣]+-([0-9][0-9][0-1][0-9][0-3][0-9])\\\\(.*).xlsx" ).Groups [ 2 ].Value;
 						dates.Add ( new DateTime ( int.Parse ( date.Substring ( 0, 4 ) ), int.Parse ( date.Substring ( 4, 2 ) ), int.Parse ( date.Substring ( 6, 2 ) ) ) );
 					}

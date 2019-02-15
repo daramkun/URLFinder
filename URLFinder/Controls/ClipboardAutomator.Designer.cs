@@ -29,6 +29,7 @@
 		private void InitializeComponent ()
 		{
 			this.groupBoxOutline = new System.Windows.Forms.GroupBox();
+			this.checkBoxFixURL = new System.Windows.Forms.CheckBox();
 			this.checkBoxDateRearrange = new System.Windows.Forms.CheckBox();
 			this.checkBoxLineMerger = new System.Windows.Forms.CheckBox();
 			this.checkBoxUseAutomation = new System.Windows.Forms.CheckBox();
@@ -39,14 +40,26 @@
 			// 
 			this.groupBoxOutline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxOutline.Controls.Add(this.checkBoxFixURL);
 			this.groupBoxOutline.Controls.Add(this.checkBoxDateRearrange);
 			this.groupBoxOutline.Controls.Add(this.checkBoxLineMerger);
-			this.groupBoxOutline.Enabled = false;
 			this.groupBoxOutline.Location = new System.Drawing.Point(3, 3);
 			this.groupBoxOutline.Name = "groupBoxOutline";
-			this.groupBoxOutline.Size = new System.Drawing.Size(194, 71);
+			this.groupBoxOutline.Size = new System.Drawing.Size(194, 94);
 			this.groupBoxOutline.TabIndex = 0;
 			this.groupBoxOutline.TabStop = false;
+			// 
+			// checkBoxFixURL
+			// 
+			this.checkBoxFixURL.AutoSize = true;
+			this.checkBoxFixURL.Checked = true;
+			this.checkBoxFixURL.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxFixURL.Location = new System.Drawing.Point(6, 66);
+			this.checkBoxFixURL.Name = "checkBoxFixURL";
+			this.checkBoxFixURL.Size = new System.Drawing.Size(75, 16);
+			this.checkBoxFixURL.TabIndex = 2;
+			this.checkBoxFixURL.Text = "URL 교정";
+			this.checkBoxFixURL.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxDateRearrange
 			// 
@@ -91,10 +104,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.checkBoxUseAutomation);
 			this.Controls.Add(this.groupBoxOutline);
-			this.MaximumSize = new System.Drawing.Size(200, 100);
-			this.MinimumSize = new System.Drawing.Size(200, 100);
+			this.MaximumSize = new System.Drawing.Size(200, 124);
+			this.MinimumSize = new System.Drawing.Size(200, 124);
 			this.Name = "ClipboardAutomator";
-			this.Size = new System.Drawing.Size(200, 100);
+			this.Size = new System.Drawing.Size(200, 124);
 			this.groupBoxOutline.ResumeLayout(false);
 			this.groupBoxOutline.PerformLayout();
 			this.ResumeLayout(false);
@@ -108,5 +121,6 @@
 		private System.Windows.Forms.CheckBox checkBoxUseAutomation;
 		private System.Windows.Forms.CheckBox checkBoxLineMerger;
 		private System.Windows.Forms.CheckBox checkBoxDateRearrange;
+		private System.Windows.Forms.CheckBox checkBoxFixURL;
 	}
 }
