@@ -316,7 +316,7 @@ namespace URLFinder
 			if ( date.Date == DateTime.Today )
 				if ( !File.Exists ( path ) )
 				{
-					MessageBox.Show ( "PDF 압축본이 아직 생성되지 않았습니다." );
+					MessageBox.Show ( this, "PDF 압축본이 아직 생성되지 않았습니다." );
 					return;
 				}
 			Process.Start ( path );
@@ -327,6 +327,8 @@ namespace URLFinder
 			( sender as Button ).Enabled = false;
 
 			var date = DateTime.Now;
+
+			bool done = false;
 			await Task.Run ( () =>
 			{
 				var archiveName = $"모니터링일지-{CustomizedValue.WorkerName}-{date.ToString ( "yyMMdd" )}";
@@ -338,7 +340,7 @@ namespace URLFinder
 				{
 					if ( !File.Exists ( pdfZipPath ) )
 					{
-						MessageBox.Show ( "본 뜬 PDF 파일 개수가 10개 미만입니다." );
+						MessageBox.Show ( this, "본 뜬 PDF 파일 개수가 10개 미만입니다." );
 						return;
 					}
 				}
@@ -349,9 +351,12 @@ namespace URLFinder
 				}
 
 				ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
+
+				done = true;
 			} );
 
-			MessageBox.Show ( "압축이 완료되었습니다." );
+			if ( done )
+				MessageBox.Show ( this, "압축이 완료되었습니다." );
 
 			( sender as Button ).Enabled = true;
 		}

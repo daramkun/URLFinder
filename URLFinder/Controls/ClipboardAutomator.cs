@@ -89,12 +89,17 @@ namespace URLFinder.Controls
 				}
 				if ( checkBoxFixURL.Checked && ExcelIndexer.SharedExcelIndexer != null )
 				{
-					if ( Regex.IsMatch ( text, "https?://(.*)" ) )
+					if ( Regex.IsMatch ( text, "^https?://[a-zA-Z0-9가-힣./?&=%#_:\\-\\\\]+$" ) )
 					{
 						BaseProcessor processor = ProcessorFinder.FindProcessor ( text );
 						e.Changed = processor.ConvertUrl ( text );
 						if ( e.Changed != text )
 							FinderLog.Log ( "클립보드 내용이 URL로 확인되어 교정함" );
+						else
+						{
+							e.Changed = null;
+							FinderLog.Log ( "클립보드 내용이 URL이지만 교정할 필요가 없음" );
+						}
 					}
 				}
 			};

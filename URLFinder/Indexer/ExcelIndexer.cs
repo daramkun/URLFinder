@@ -206,9 +206,7 @@ namespace URLFinder.Finder
 											break;
 
 										newRecord.Enqueue ( new IndexedItem ( websiteName as string, url as string, baseUrl as string, file ) );
-
-										if ( state != null )
-											Interlocked.Increment ( ref state.totalItemCount );
+										
 										++count;
 									}
 								}
@@ -217,7 +215,10 @@ namespace URLFinder.Finder
 							connection.Close ();
 
 							if ( state != null )
+							{
+								Interlocked.Add ( ref state.totalItemCount, count );
 								Interlocked.Increment ( ref state.excelFileCount );
+							}
 
 							newFile.Enqueue ( new CacheFiles () { Filename = file, LastModifiedDateTime = File.GetLastWriteTime ( file ) } );
 

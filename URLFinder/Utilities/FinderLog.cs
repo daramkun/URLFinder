@@ -17,7 +17,11 @@ namespace URLFinder.Utilities
 
 		static FinderLog ()
 		{
-			streamWriter = File.AppendText ( Path.Combine ( Program.ProgramPath, "URLFinder.log" ) );
+			streamWriter = new StreamWriter ( new FileStream ( "URLFinder.log", FileMode.Append, FileAccess.Write, FileShare.ReadWrite ), Encoding.UTF8, 4096, false )
+			{
+				AutoFlush = true
+			};
+
 			streamWriter.WriteLine ( "=============================================" );
 			streamWriter.WriteLine ( " URL Finder v3 Log Data" );
 			streamWriter.WriteLine ( "=============================================" );
@@ -33,6 +37,7 @@ namespace URLFinder.Utilities
 							Debug.Write ( message );
 							streamWriter.Write ( message );
 						}
+						Thread.Sleep ( 1 );
 					}
 				}
 				catch { }
@@ -42,7 +47,7 @@ namespace URLFinder.Utilities
 		public static void Log ( string message )
 		{
 			StringBuilder logMsg = new StringBuilder ();
-			logMsg.AppendFormat ( "[{0:yyyy-MM-dd hh:mm:ss}]", DateTime.Now ).AppendFormat ( "[{0:x}]", Thread.CurrentThread.ManagedThreadId )
+			logMsg.AppendFormat ( "[{0:yyyy-MM-dd hh:mm:ss}]", DateTime.Now )
 				.Append ( message ).Append ( Environment.NewLine );
 			message = logMsg.ToString ();
 			
