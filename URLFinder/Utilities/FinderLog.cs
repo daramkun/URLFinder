@@ -17,7 +17,8 @@ namespace URLFinder.Utilities
 
 		static FinderLog ()
 		{
-			streamWriter = new StreamWriter ( new FileStream ( "URLFinder.log", FileMode.Append, FileAccess.Write, FileShare.ReadWrite ), Encoding.UTF8, 4096, false )
+			streamWriter = new StreamWriter ( new FileStream ( Path.Combine ( Program.ProgramPath, "URLFinder.log" ),
+				FileMode.Append, FileAccess.Write, FileShare.ReadWrite ), Encoding.UTF8, 4096, false )
 			{
 				AutoFlush = true
 			};

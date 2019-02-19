@@ -92,7 +92,7 @@ namespace URLFinder.Controls
 					if ( Regex.IsMatch ( text, "^https?://[a-zA-Z0-9가-힣./?&=%#_:\\-\\\\]+$" ) )
 					{
 						BaseProcessor processor = ProcessorFinder.FindProcessor ( text );
-						e.Changed = processor.ConvertUrl ( text );
+						e.Changed = processor?.ConvertUrl ( text );
 						if ( e.Changed != text )
 							FinderLog.Log ( "클립보드 내용이 URL로 확인되어 교정함" );
 						else
@@ -115,6 +115,15 @@ namespace URLFinder.Controls
 		private void CheckBoxUseAutomation_CheckedChanged ( object sender, EventArgs e )
 		{
 			groupBoxOutline.Enabled = checkBoxUseAutomation.Checked;
+
+			if ( checkBoxUseAutomation.Checked )
+			{
+
+			}
+			else
+			{
+
+			}
 		}
 
 		protected override void WndProc ( ref System.Windows.Forms.Message m )

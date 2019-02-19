@@ -129,25 +129,24 @@ namespace URLFinder
 
 			tabControlKeywords.SelectedIndex = ( ( int ) DateTime.Today.DayOfWeek ) - 1;
 
-			textBoxKeywordMonday.Text = Settings.Default.search_keyword_mon;
-			textBoxKeywordTuesday.Text = Settings.Default.search_keyword_tue;
-			textBoxKeywordWednesday.Text = Settings.Default.search_keyword_wed;
-			textBoxKeywordThursday.Text = Settings.Default.search_keyword_thu;
-			textBoxKeywordFriday.Text = Settings.Default.search_keyword_fri;
-			textBoxKeywordAdditional.Text = Settings.Default.search_keyword_extra;
+			textBoxKeywordMonday.Text = CustomizedValue.MondayKeyword;
+			textBoxKeywordTuesday.Text = CustomizedValue.TuesdayKeyword;
+			textBoxKeywordWednesday.Text = CustomizedValue.WednesdayKeyword;
+			textBoxKeywordThursday.Text = CustomizedValue.ThursdayKeyword;
+			textBoxKeywordFriday.Text = CustomizedValue.FridayKeyword;
+			textBoxKeywordAdditional.Text = CustomizedValue.AdditiveKeyword;
 
 			tabControl.Enabled = true;
 		}
 
 		private void MainWindow_FormClosing ( object sender, FormClosingEventArgs e )
 		{
-			Settings.Default.search_keyword_mon = textBoxKeywordMonday.Text;
-			Settings.Default.search_keyword_tue = textBoxKeywordTuesday.Text;
-			Settings.Default.search_keyword_wed = textBoxKeywordWednesday.Text;
-			Settings.Default.search_keyword_thu = textBoxKeywordThursday.Text;
-			Settings.Default.search_keyword_fri = textBoxKeywordFriday.Text;
-			Settings.Default.search_keyword_extra = textBoxKeywordAdditional.Text;
-			Settings.Default.Save ();
+			CustomizedValue.MondayKeyword = textBoxKeywordMonday.Text;
+			CustomizedValue.TuesdayKeyword = textBoxKeywordTuesday.Text;
+			CustomizedValue.WednesdayKeyword = textBoxKeywordWednesday.Text;
+			CustomizedValue.ThursdayKeyword = textBoxKeywordThursday.Text;
+			CustomizedValue.FridayKeyword = textBoxKeywordFriday.Text;
+			CustomizedValue.AdditiveKeyword = textBoxKeywordAdditional.Text;
 
 			CustomizedValue.Save ();
 		}
