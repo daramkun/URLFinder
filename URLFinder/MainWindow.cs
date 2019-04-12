@@ -351,7 +351,8 @@ namespace URLFinder
 					}
 					else
 					{
-
+						ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
+						MessageBox.Show ( this, "PDF 압축", "압축이 완료되었습니다." );
 					}
 				}
 				else
