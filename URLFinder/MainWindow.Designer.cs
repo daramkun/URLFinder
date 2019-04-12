@@ -32,6 +32,7 @@
 			this.tabPageURLFind = new System.Windows.Forms.TabPage();
 			this.treeViewLog = new System.Windows.Forms.TreeView();
 			this.buttonSearch = new System.Windows.Forms.Button();
+			this.textBoxSearch = new URLFinder.Controls.PasteDetectableTextBox();
 			this.tabPageMergeLines = new System.Windows.Forms.TabPage();
 			this.buttonMergedCopy = new System.Windows.Forms.Button();
 			this.textBoxLineMerge = new System.Windows.Forms.TextBox();
@@ -45,6 +46,7 @@
 			this.textBoxSplittedURL = new System.Windows.Forms.TextBox();
 			this.tabPageManagement = new System.Windows.Forms.TabPage();
 			this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+			this.clipboardAutomator = new URLFinder.Controls.ClipboardAutomator();
 			this.buttonUnregisterStartProgram = new System.Windows.Forms.Button();
 			this.buttonRegisterStartProgramWithStartupUtility = new System.Windows.Forms.Button();
 			this.buttonRegisterStartProgram = new System.Windows.Forms.Button();
@@ -69,8 +71,6 @@
 			this.buttonManagementOpenHWP = new System.Windows.Forms.Button();
 			this.buttonManagementOpenFolder = new System.Windows.Forms.Button();
 			this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-			this.textBoxSearch = new URLFinder.Controls.PasteDetectableTextBox();
-			this.clipboardAutomator = new URLFinder.Controls.ClipboardAutomator();
 			this.tabControl.SuspendLayout();
 			this.tabPageURLFind.SuspendLayout();
 			this.tabPageMergeLines.SuspendLayout();
@@ -144,6 +144,17 @@
 			this.buttonSearch.Text = "검색";
 			this.buttonSearch.UseVisualStyleBackColor = true;
 			this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
+			// 
+			// textBoxSearch
+			// 
+			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSearch.Location = new System.Drawing.Point(8, 7);
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.Size = new System.Drawing.Size(490, 23);
+			this.textBoxSearch.TabIndex = 0;
+			this.textBoxSearch.Pasted += new System.EventHandler(this.TextBoxSearch_Pasted);
+			this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
 			// 
 			// tabPageMergeLines
 			// 
@@ -329,6 +340,18 @@
 			this.groupBoxSettings.TabStop = false;
 			this.groupBoxSettings.Text = "설정";
 			// 
+			// clipboardAutomator
+			// 
+			this.clipboardAutomator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.clipboardAutomator.Location = new System.Drawing.Point(11, 109);
+			this.clipboardAutomator.MaximumSize = new System.Drawing.Size(200, 124);
+			this.clipboardAutomator.MinimumSize = new System.Drawing.Size(200, 124);
+			this.clipboardAutomator.Name = "clipboardAutomator";
+			this.clipboardAutomator.Size = new System.Drawing.Size(200, 124);
+			this.clipboardAutomator.TabIndex = 6;
+			this.clipboardAutomator.UseClipboardAutomation = true;
+			// 
 			// buttonUnregisterStartProgram
 			// 
 			this.buttonUnregisterStartProgram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -405,6 +428,7 @@
 			// 
 			// textBoxKeywordMonday
 			// 
+			this.textBoxKeywordMonday.AcceptsReturn = true;
 			this.textBoxKeywordMonday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -412,7 +436,7 @@
 			this.textBoxKeywordMonday.Multiline = true;
 			this.textBoxKeywordMonday.Name = "textBoxKeywordMonday";
 			this.textBoxKeywordMonday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordMonday.Size = new System.Drawing.Size(299, 258);
+			this.textBoxKeywordMonday.Size = new System.Drawing.Size(299, 260);
 			this.textBoxKeywordMonday.TabIndex = 0;
 			// 
 			// tabPageTuesdayKeywords
@@ -421,13 +445,14 @@
 			this.tabPageTuesdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageTuesdayKeywords.Name = "tabPageTuesdayKeywords";
 			this.tabPageTuesdayKeywords.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageTuesdayKeywords.Size = new System.Drawing.Size(312, 272);
+			this.tabPageTuesdayKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageTuesdayKeywords.TabIndex = 1;
 			this.tabPageTuesdayKeywords.Text = "화";
 			this.tabPageTuesdayKeywords.UseVisualStyleBackColor = true;
 			// 
 			// textBoxKeywordTuesday
 			// 
+			this.textBoxKeywordTuesday.AcceptsReturn = true;
 			this.textBoxKeywordTuesday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -435,7 +460,7 @@
 			this.textBoxKeywordTuesday.Multiline = true;
 			this.textBoxKeywordTuesday.Name = "textBoxKeywordTuesday";
 			this.textBoxKeywordTuesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(300, 264);
+			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(299, 266);
 			this.textBoxKeywordTuesday.TabIndex = 1;
 			// 
 			// tabPageWednesdayKeywords
@@ -443,13 +468,14 @@
 			this.tabPageWednesdayKeywords.Controls.Add(this.textBoxKeywordWednesday);
 			this.tabPageWednesdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageWednesdayKeywords.Name = "tabPageWednesdayKeywords";
-			this.tabPageWednesdayKeywords.Size = new System.Drawing.Size(312, 272);
+			this.tabPageWednesdayKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageWednesdayKeywords.TabIndex = 2;
 			this.tabPageWednesdayKeywords.Text = "수";
 			this.tabPageWednesdayKeywords.UseVisualStyleBackColor = true;
 			// 
 			// textBoxKeywordWednesday
 			// 
+			this.textBoxKeywordWednesday.AcceptsReturn = true;
 			this.textBoxKeywordWednesday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -457,7 +483,7 @@
 			this.textBoxKeywordWednesday.Multiline = true;
 			this.textBoxKeywordWednesday.Name = "textBoxKeywordWednesday";
 			this.textBoxKeywordWednesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(300, 264);
+			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(299, 266);
 			this.textBoxKeywordWednesday.TabIndex = 1;
 			// 
 			// tabPageThursdayKeywords
@@ -465,13 +491,14 @@
 			this.tabPageThursdayKeywords.Controls.Add(this.textBoxKeywordThursday);
 			this.tabPageThursdayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageThursdayKeywords.Name = "tabPageThursdayKeywords";
-			this.tabPageThursdayKeywords.Size = new System.Drawing.Size(312, 272);
+			this.tabPageThursdayKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageThursdayKeywords.TabIndex = 3;
 			this.tabPageThursdayKeywords.Text = "목";
 			this.tabPageThursdayKeywords.UseVisualStyleBackColor = true;
 			// 
 			// textBoxKeywordThursday
 			// 
+			this.textBoxKeywordThursday.AcceptsReturn = true;
 			this.textBoxKeywordThursday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -479,7 +506,7 @@
 			this.textBoxKeywordThursday.Multiline = true;
 			this.textBoxKeywordThursday.Name = "textBoxKeywordThursday";
 			this.textBoxKeywordThursday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordThursday.Size = new System.Drawing.Size(300, 264);
+			this.textBoxKeywordThursday.Size = new System.Drawing.Size(299, 266);
 			this.textBoxKeywordThursday.TabIndex = 1;
 			// 
 			// tabPageFridayKeywords
@@ -487,13 +514,14 @@
 			this.tabPageFridayKeywords.Controls.Add(this.textBoxKeywordFriday);
 			this.tabPageFridayKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageFridayKeywords.Name = "tabPageFridayKeywords";
-			this.tabPageFridayKeywords.Size = new System.Drawing.Size(312, 272);
+			this.tabPageFridayKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageFridayKeywords.TabIndex = 4;
 			this.tabPageFridayKeywords.Text = "금";
 			this.tabPageFridayKeywords.UseVisualStyleBackColor = true;
 			// 
 			// textBoxKeywordFriday
 			// 
+			this.textBoxKeywordFriday.AcceptsReturn = true;
 			this.textBoxKeywordFriday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -501,7 +529,7 @@
 			this.textBoxKeywordFriday.Multiline = true;
 			this.textBoxKeywordFriday.Name = "textBoxKeywordFriday";
 			this.textBoxKeywordFriday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordFriday.Size = new System.Drawing.Size(300, 264);
+			this.textBoxKeywordFriday.Size = new System.Drawing.Size(299, 266);
 			this.textBoxKeywordFriday.TabIndex = 1;
 			// 
 			// tabPageAdditionalKeywords
@@ -509,13 +537,14 @@
 			this.tabPageAdditionalKeywords.Controls.Add(this.textBoxKeywordAdditional);
 			this.tabPageAdditionalKeywords.Location = new System.Drawing.Point(4, 24);
 			this.tabPageAdditionalKeywords.Name = "tabPageAdditionalKeywords";
-			this.tabPageAdditionalKeywords.Size = new System.Drawing.Size(312, 272);
+			this.tabPageAdditionalKeywords.Size = new System.Drawing.Size(311, 272);
 			this.tabPageAdditionalKeywords.TabIndex = 5;
 			this.tabPageAdditionalKeywords.Text = "추가 검색어";
 			this.tabPageAdditionalKeywords.UseVisualStyleBackColor = true;
 			// 
 			// textBoxKeywordAdditional
 			// 
+			this.textBoxKeywordAdditional.AcceptsReturn = true;
 			this.textBoxKeywordAdditional.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -523,7 +552,7 @@
 			this.textBoxKeywordAdditional.Multiline = true;
 			this.textBoxKeywordAdditional.Name = "textBoxKeywordAdditional";
 			this.textBoxKeywordAdditional.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(300, 264);
+			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(299, 266);
 			this.textBoxKeywordAdditional.TabIndex = 1;
 			// 
 			// groupBoxManagementByDate
@@ -611,26 +640,6 @@
 			this.monthCalendar.Name = "monthCalendar";
 			this.monthCalendar.TabIndex = 0;
 			this.monthCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar_DateSelected);
-			// 
-			// textBoxSearch
-			// 
-			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSearch.Location = new System.Drawing.Point(8, 7);
-			this.textBoxSearch.Name = "textBoxSearch";
-			this.textBoxSearch.Size = new System.Drawing.Size(490, 23);
-			this.textBoxSearch.TabIndex = 0;
-			this.textBoxSearch.Pasted += new System.EventHandler(this.TextBoxSearch_Pasted);
-			this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxClickToSelectAll_MouseClick);
-			// 
-			// clipboardAutomator
-			// 
-			this.clipboardAutomator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.clipboardAutomator.Location = new System.Drawing.Point(11, 109);
-			this.clipboardAutomator.Name = "clipboardAutomator";
-			this.clipboardAutomator.Size = new System.Drawing.Size(200, 100);
-			this.clipboardAutomator.TabIndex = 6;
 			// 
 			// MainWindow
 			// 
