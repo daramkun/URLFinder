@@ -5,13 +5,14 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace URLFinder.Utilities
 {
 	public static class ArchivingUtility
 	{
-		public static void ArchivePdfs ( string target, params string [] pdfPaths )
+		public static void ArchivePdfs ( string target, Action<string> preprocess, Action<string> proceed, CancellationToken token, params string [] pdfPaths )
 		{
 			Directory.CreateDirectory ( Path.Combine ( Program.ProgramPath, "PdfTemp" ) );
 			using ( Stream fs = new FileStream ( target, FileMode.Create ) )
@@ -20,6 +21,11 @@ namespace URLFinder.Utilities
 				{
 					foreach ( var pdfPath in pdfPaths )
 					{
+						if ( token.IsCancellationRequested )
+							break;
+
+						preprocess?.Invoke ( pdfPath );
+
 						var entry = archive.CreateEntry ( Path.GetFileName ( pdfPath ), CompressionLevel.Optimal );
 						using ( Stream entryStream = entry.Open () )
 						{
@@ -37,6 +43,8 @@ namespace URLFinder.Utilities
 
 							File.Delete ( newPdfPath );
 						}
+
+						proceed?.Invoke ( pdfPath );
 					}
 				}
 			}
