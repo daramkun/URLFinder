@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using Daramee.Winston.Dialogs;
+using Daramee.Winston.File;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,14 +118,18 @@ namespace URLFinder
 			indexer = await ExcelIndexerBuilder.ToIndexer ( builderState );
 
 			var sorted = from date in indexer.IndexedDates orderby date ascending select date;
-			monthCalendar.MinDate = sorted.First ();
-			monthCalendar.MaxDate = DateTime.Today;
-
-			for ( DateTime d = sorted.First (); d < DateTime.Today; d = d.AddDays ( 1 ) )
+			if ( sorted != null && sorted.Count () > 0 )
 			{
-				if ( ( indexer.IndexedDates as List<DateTime> ).Contains ( d ) )
-					monthCalendar.AddBoldedDate ( d );
+				monthCalendar.MinDate = sorted.First ();
+				monthCalendar.MaxDate = DateTime.Today;
+
+				for ( DateTime d = sorted.First (); d < DateTime.Today; d = d.AddDays ( 1 ) )
+				{
+					if ( ( indexer.IndexedDates as List<DateTime> ).Contains ( d ) )
+						monthCalendar.AddBoldedDate ( d );
+				}
 			}
+			else monthCalendar.MinDate = monthCalendar.MaxDate = DateTime.Today;
 
 			MonthCalendar_DateSelected ( monthCalendar, new DateRangeEventArgs ( DateTime.Today, DateTime.Today ) );
 
@@ -326,6 +332,7 @@ namespace URLFinder
 			( sender as Button ).Enabled = false;
 
 			var date = DateTime.Now;
+			var handle = Handle;
 
 			bool done = false;
 			await Task.Run ( () =>
@@ -335,27 +342,87 @@ namespace URLFinder
 				var pdfZipPath = $@"{dateDir}\{date.Month:00}{date.Day:00}.zip";
 
 				string [] pdfs = Directory.GetFiles ( CustomizedValue.WorkingDirectory, "*.pdf", SearchOption.TopDirectoryOnly );
-				if ( pdfs == null || pdfs.Length < 10 )
+				if ( pdfs == null || pdfs.Length < 5 )
 				{
 					if ( !File.Exists ( pdfZipPath ) )
 					{
-						MessageBox.Show ( this, "본 뜬 PDF 파일 개수가 10개 미만입니다." );
+						MessageBox.Show ( this, "본 뜬 PDF 파일 개수가 5개 미만입니다." );
 						return;
+					}
+					else
+					{
+						ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
+						Invoke ( new Action ( () => MessageBox.Show ( this, "압축이 완료되었습니다.", "PDF 압축" ) ) );
 					}
 				}
 				else
 				{
-					ArchivingUtility.ArchivePdfs ( pdfZipPath, pdfs );
-					FileDeleter.Delete ( pdfs );
-				}
+					CancellationTokenSource token = new CancellationTokenSource ();
 
-				ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
+					TaskDialog dialog = new TaskDialog ();
+					dialog.Title = "PDF 압축";
+					dialog.MainInstruction = "PDF 파일을 ZIP 파일로 압축합니다.";
+					dialog.Content = "Ghostscript를 이용해 PDF 파일의 크기를 줄인 후 ZIP 파일로 묶습니다.";
+					dialog.CommonButtons = TaskDialogCommonButtonFlags.Cancel;
+					dialog.ShowProgressBar = true;
+					dialog.Footer = "준비 중.";
+					dialog.ButtonClicked += ( sender2, e2 ) =>
+					{
+						token.Cancel ();
+					};
+					dialog.Created += async ( sender2, e2 ) =>
+					{
+						e2.SetProgressBarRange ( 0, ( ushort ) pdfs.Length );
+						await Task.Run ( () =>
+						{
+							int proceed = 0;
+							ArchivingUtility.ArchivePdfs ( pdfZipPath,
+								( path ) =>
+								{
+									e2.SetElementText ( TaskDialogElement.Footer, $"처리 중: {path}" );
+								},
+								( path ) =>
+								{
+									e2.SetProgressBarPosition ( ++proceed );
+								}, token.Token, pdfs );
+							e2.SetElementText ( TaskDialogElement.Footer, "정리 중..." );
+
+							if ( token.IsCancellationRequested )
+								return;
+
+							Operation.Begin ();
+							foreach ( var pdf in pdfs )
+							{
+								if ( token.IsCancellationRequested )
+									return;
+								Operation.Delete ( pdf );
+							}
+							Operation.End ();
+
+							if ( token.IsCancellationRequested )
+								return;
+
+							ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
+
+							TaskDialog nextDialog = new TaskDialog ();
+							nextDialog.Title = "PDF 압축";
+							nextDialog.MainInstruction = "압축이 완료되었습니다.";
+							nextDialog.Content = "파일 압축이 완료되었습니다.";
+							nextDialog.CommonButtons = TaskDialogCommonButtonFlags.OK;
+							nextDialog.EnableHyperlinks = true;
+							nextDialog.Footer = "<a>파일 위치로 이동</a>";
+							nextDialog.HyperlinkClicked += ( sender3, e3 ) =>
+							{
+								Process.Start ( "explorer", CustomizedValue.WorkingDirectory );
+							};
+							e2.NavigatePage ( nextDialog );
+						}, token.Token );
+					};
+					dialog.Show ( handle );
+				}
 
 				done = true;
 			} );
-
-			if ( done )
-				MessageBox.Show ( this, "압축이 완료되었습니다." );
 
 			( sender as Button ).Enabled = true;
 		}

@@ -1,0 +1,3 @@
+[submodule "ExternalLibs/Winston"]
+	path = ExternalLibs/Winston
+	url = https://github.com/daramkun/Winston.git

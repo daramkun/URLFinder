@@ -14,6 +14,9 @@ namespace URLFinder.Processors
 
 		public override string ConvertUrl ( string url )
 		{
+			if ( url.IndexOf ( "m.todayhumor.co.kr" ) >= 0 )
+				url = url.Replace ( "m.todayhumor.co.kr/view.php", "www.todayhumor.co.kr/board/view.php" );
+
 			if ( url.IndexOf ( "todayhumor.co.kr" ) >= 0 )
 			{
 				var tableMatch = Regex.Match ( url, "(.*)table=([a-zA-Z0-9_]+)(.*)" );
