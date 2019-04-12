@@ -1,4 +1,5 @@
-﻿using LiteDB;
+﻿using Daramee.Winston.File;
+using LiteDB;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

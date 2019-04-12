@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Daramee.Winston.File;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,14 +117,18 @@ namespace URLFinder
 			indexer = await ExcelIndexerBuilder.ToIndexer ( builderState );
 
 			var sorted = from date in indexer.IndexedDates orderby date ascending select date;
-			monthCalendar.MinDate = sorted.First ();
-			monthCalendar.MaxDate = DateTime.Today;
-
-			for ( DateTime d = sorted.First (); d < DateTime.Today; d = d.AddDays ( 1 ) )
+			if ( sorted != null && sorted.Count () > 0 )
 			{
-				if ( ( indexer.IndexedDates as List<DateTime> ).Contains ( d ) )
-					monthCalendar.AddBoldedDate ( d );
+				monthCalendar.MinDate = sorted.First ();
+				monthCalendar.MaxDate = DateTime.Today;
+
+				for ( DateTime d = sorted.First (); d < DateTime.Today; d = d.AddDays ( 1 ) )
+				{
+					if ( ( indexer.IndexedDates as List<DateTime> ).Contains ( d ) )
+						monthCalendar.AddBoldedDate ( d );
+				}
 			}
+			else monthCalendar.MinDate = monthCalendar.MaxDate = DateTime.Today;
 
 			MonthCalendar_DateSelected ( monthCalendar, new DateRangeEventArgs ( DateTime.Today, DateTime.Today ) );
 
@@ -346,7 +351,8 @@ namespace URLFinder
 				else
 				{
 					ArchivingUtility.ArchivePdfs ( pdfZipPath, pdfs );
-					FileDeleter.Delete ( pdfs );
+					foreach ( var pdf in pdfs )
+						Operation.Delete ( pdf );
 				}
 
 				ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );

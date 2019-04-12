@@ -27,11 +27,14 @@ namespace URLFinder.Processors
 		{
 			url = Regex.Replace ( url, "[a-zA-Z0-9_\\-]+=&", "&" );
 			url = Regex.Replace ( url, "[a-zA-Z0-9_\\-]+=$", "" );
+
 			while ( url.IndexOf ( "&&" ) >= 0 )
 				url = url.Replace ( "&&", "&" );
+
 			var commentStart = url.IndexOf ( '#' );
 			if ( commentStart >= 0 )
 				url = url.Substring ( 0, commentStart );
+
 			if ( url [ url.Length - 1 ] == '?' )
 				url = url.Substring ( 0, url.Length - 1 );
 			if ( url [ url.Length - 1 ] == '/' )

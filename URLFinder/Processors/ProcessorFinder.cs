@@ -46,7 +46,6 @@ namespace URLFinder.Processors
 				new SimpleProcessor ( "나무라이브", new Uri ( "https://namu.live" ) ),
 				new SimpleProcessor ( "에펨네이션", new Uri ( "http://www.fmnation.net" ) ),
 				new SimpleProcessor ( "오르비", new Uri ( "https://orbi.kr" ) ),
-				new SimpleProcessor ( "인벤", new Uri ( "http://www.inven.co.kr" ) ),
 				new SimpleProcessor ( "클리앙", new Uri ( "http://www.clien.net" ) ),
 				new SimpleProcessor ( "와이고수", new Uri ( "https://www.ygosu.com" ) ),
 				new SimpleProcessor ( "OP.GG", new Uri ( "http://op.gg" ) ),

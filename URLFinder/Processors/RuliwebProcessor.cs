@@ -14,6 +14,9 @@ namespace URLFinder.Processors
 
 		public override string ConvertUrl ( string url )
 		{
+			if ( url.IndexOf ( "m.ruliweb.com" ) >= 0 )
+				url = url.Replace ( "m.ruliweb.com", "bbs.ruliweb.com" );
+
 			if ( url.IndexOf ( "bbs.ruliweb.com" ) >= 0 )
 			{
 				var urlMatch = Regex.Match ( url, "https?://bbs.ruliweb.com/([a-zA-Z0-9_]+)/board/([0-9]+)/read/([0-9]+)" );
