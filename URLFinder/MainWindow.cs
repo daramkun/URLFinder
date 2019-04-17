@@ -334,7 +334,6 @@ namespace URLFinder
 			var date = DateTime.Now;
 			var handle = Handle;
 
-			bool done = false;
 			await Task.Run ( () =>
 			{
 				var archiveName = $"모니터링일지-{CustomizedValue.WorkerName}-{date.ToString ( "yyMMdd" )}";
@@ -360,6 +359,8 @@ namespace URLFinder
 					CancellationTokenSource token = new CancellationTokenSource ();
 
 					TaskDialog dialog = new TaskDialog ();
+					TaskDialog nextDialog = new TaskDialog ();
+
 					dialog.Title = "PDF 압축";
 					dialog.MainInstruction = "PDF 파일을 ZIP 파일로 압축합니다.";
 					dialog.Content = "Ghostscript를 이용해 PDF 파일의 크기를 줄인 후 ZIP 파일로 묶습니다.";
@@ -404,7 +405,6 @@ namespace URLFinder
 
 							ArchivingUtility.ArchiveDirectory ( Path.Combine ( CustomizedValue.WorkingDirectory, $"{archiveName}.zip" ), dateDir );
 
-							TaskDialog nextDialog = new TaskDialog ();
 							nextDialog.Title = "PDF 압축";
 							nextDialog.MainInstruction = "압축이 완료되었습니다.";
 							nextDialog.Content = "파일 압축이 완료되었습니다.";
@@ -420,8 +420,6 @@ namespace URLFinder
 					};
 					dialog.Show ( handle );
 				}
-
-				done = true;
 			} );
 
 			( sender as Button ).Enabled = true;
