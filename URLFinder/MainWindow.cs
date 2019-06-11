@@ -418,7 +418,12 @@ namespace URLFinder
 							e2.NavigatePage ( nextDialog );
 						}, token.Token );
 					};
-					dialog.Show ( handle );
+
+					try
+					{
+						dialog.Show ( handle );
+					}
+					catch { }
 				}
 			} );
 

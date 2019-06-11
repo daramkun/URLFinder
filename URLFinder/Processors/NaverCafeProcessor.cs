@@ -19,12 +19,12 @@ namespace URLFinder.Processors
 			{
 				if ( url.IndexOf ( "articleid=" ) >= 0 )
 				{
-					var cafeMatch = Regex.Match ( url, "cafe.naver.com/([a-zA-Z0-9_]+)(.*)" );
+					var cafeMatch = Regex.Match ( url, "cafe.naver.com/([a-zA-Z0-9_]+)?(.*)" );
 					var noMatch = Regex.Match ( url, "(.*)articleid=([0-9]+)(.*)" );
 					if ( ( cafeMatch != null && cafeMatch.Success )
 						&& ( noMatch != null && noMatch.Success ) )
 					{
-						url = $"https://cafe.naver.com/{cafeMatch.Groups [ 2 ].Value}/{noMatch.Groups [ 2 ].Value}";
+						url = $"https://cafe.naver.com/{cafeMatch.Groups [ 1 ].Value}/{noMatch.Groups [ 2 ].Value}";
 						return url;
 					}
 				}
