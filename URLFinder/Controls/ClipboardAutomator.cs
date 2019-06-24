@@ -19,6 +19,19 @@ namespace URLFinder.Controls
 	[DefaultEvent ( "ClipboardChanged" )]
 	public partial class ClipboardAutomator : UserControl
 	{
+		private static readonly string [] AllowedProcessNames = new []
+		{
+			"iexplore",
+			"chrome",
+			"opera",
+			"firefox",
+			"vivaldi",
+			"safari",
+			"MicrosoftEdge",
+			"MicrosoftEdgeCP",
+			"MicrosoftEdgeSH",
+		};
+
 		[DllImport ( "user32.dll" )]
 		protected static extern int SetClipboardViewer ( int hWndNewViewer );
 		[DllImport ( "user32.dll" )]
@@ -29,7 +42,13 @@ namespace URLFinder.Controls
 		private static extern bool RegisterHotKey ( IntPtr hWnd, int id, uint fsModifiers, uint vk );
 		[DllImport ( "user32.dll" )]
 		private static extern bool UnregisterHotKey ( IntPtr hWnd, int id );
-
+		[DllImport ( "user32.dll" )]
+		private static extern IntPtr GetActiveWindow ();
+		[DllImport ( "user32.dll" )]
+		private static extern IntPtr GetForegroundWindow ();
+		[DllImport ( "user32.dll", SetLastError = true )]
+		private static extern uint GetWindowThreadProcessId ( IntPtr hWnd, out uint lpdwProcessId );
+		
 		IntPtr nextClipboardViewer;
 
 		public event EventHandler<ClipboardChangedEventArgs> ClipboardChanged;
@@ -52,6 +71,18 @@ namespace URLFinder.Controls
 
 				if ( !checkBoxUseAutomation.Checked )
 					return;
+
+				if ( checkBoxOnlyFromWebBrowser.Checked )
+				{
+					IntPtr activeWindow = GetForegroundWindow ();
+					GetWindowThreadProcessId ( activeWindow, out uint pid );
+					Process process = Process.GetProcessById ( ( int ) pid );
+					if ( !AllowedProcessNames.Contains ( process.ProcessName ) )
+					{
+						Debug.WriteLine ( "Clipboard Cut/Copy from No Web Browser." );
+						return;
+					}
+				}
 
 				if ( !( e.DataObject.GetData ( "Text" ) is string text ) )
 					return;
@@ -94,7 +125,7 @@ namespace URLFinder.Controls
 				}
 				if ( checkBoxFixURL.Checked && ExcelIndexer.SharedExcelIndexer != null )
 				{
-					if ( Regex.IsMatch ( text, "^https?://[a-zA-Z0-9가-힣./?&=%#_:\\-\\\\]+$" ) )
+					if ( Regex.IsMatch ( text, "^https?://[a-zA-Z0-9가-힣./?&=%#+%_:\\-\\\\]+$" ) )
 					{
 						BaseProcessor processor = ProcessorFinder.FindProcessor ( text );
 						e.Changed = processor?.ConvertUrl ( text );
@@ -110,11 +141,13 @@ namespace URLFinder.Controls
 			};
 
 			RegisterHotKey ( Handle, 0, 1, ( int ) Keys.C );
+			RegisterHotKey ( Handle, 1, 1, ( int ) Keys.W );
 		}
 
 		~ClipboardAutomator ()
 		{
 			UnregisterHotKey ( Handle, 0 );
+			UnregisterHotKey ( Handle, 1 );
 		}
 
 		private void CheckBoxUseAutomation_CheckedChanged ( object sender, EventArgs e )
@@ -162,6 +195,8 @@ namespace URLFinder.Controls
 
 						if ( modifier == 1 && key == Keys.C )
 							checkBoxUseAutomation.Checked = !checkBoxUseAutomation.Checked;
+						else if ( modifier == 1 && key == Keys.W )
+							checkBoxOnlyFromWebBrowser.Checked = !checkBoxOnlyFromWebBrowser.Checked;
 					}
 					break;
 

@@ -345,10 +345,10 @@
 			this.clipboardAutomator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.clipboardAutomator.Location = new System.Drawing.Point(11, 109);
-			this.clipboardAutomator.MaximumSize = new System.Drawing.Size(200, 124);
-			this.clipboardAutomator.MinimumSize = new System.Drawing.Size(200, 124);
+			this.clipboardAutomator.MaximumSize = new System.Drawing.Size(200, 154);
+			this.clipboardAutomator.MinimumSize = new System.Drawing.Size(200, 154);
 			this.clipboardAutomator.Name = "clipboardAutomator";
-			this.clipboardAutomator.Size = new System.Drawing.Size(200, 124);
+			this.clipboardAutomator.Size = new System.Drawing.Size(200, 154);
 			this.clipboardAutomator.TabIndex = 6;
 			this.clipboardAutomator.UseClipboardAutomation = true;
 			// 
@@ -436,7 +436,7 @@
 			this.textBoxKeywordMonday.Multiline = true;
 			this.textBoxKeywordMonday.Name = "textBoxKeywordMonday";
 			this.textBoxKeywordMonday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordMonday.Size = new System.Drawing.Size(299, 260);
+			this.textBoxKeywordMonday.Size = new System.Drawing.Size(299, 262);
 			this.textBoxKeywordMonday.TabIndex = 0;
 			// 
 			// tabPageTuesdayKeywords
@@ -460,7 +460,7 @@
 			this.textBoxKeywordTuesday.Multiline = true;
 			this.textBoxKeywordTuesday.Name = "textBoxKeywordTuesday";
 			this.textBoxKeywordTuesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(299, 266);
+			this.textBoxKeywordTuesday.Size = new System.Drawing.Size(299, 268);
 			this.textBoxKeywordTuesday.TabIndex = 1;
 			// 
 			// tabPageWednesdayKeywords
@@ -483,7 +483,7 @@
 			this.textBoxKeywordWednesday.Multiline = true;
 			this.textBoxKeywordWednesday.Name = "textBoxKeywordWednesday";
 			this.textBoxKeywordWednesday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(299, 266);
+			this.textBoxKeywordWednesday.Size = new System.Drawing.Size(299, 268);
 			this.textBoxKeywordWednesday.TabIndex = 1;
 			// 
 			// tabPageThursdayKeywords
@@ -506,7 +506,7 @@
 			this.textBoxKeywordThursday.Multiline = true;
 			this.textBoxKeywordThursday.Name = "textBoxKeywordThursday";
 			this.textBoxKeywordThursday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordThursday.Size = new System.Drawing.Size(299, 266);
+			this.textBoxKeywordThursday.Size = new System.Drawing.Size(299, 268);
 			this.textBoxKeywordThursday.TabIndex = 1;
 			// 
 			// tabPageFridayKeywords
@@ -529,7 +529,7 @@
 			this.textBoxKeywordFriday.Multiline = true;
 			this.textBoxKeywordFriday.Name = "textBoxKeywordFriday";
 			this.textBoxKeywordFriday.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordFriday.Size = new System.Drawing.Size(299, 266);
+			this.textBoxKeywordFriday.Size = new System.Drawing.Size(299, 268);
 			this.textBoxKeywordFriday.TabIndex = 1;
 			// 
 			// tabPageAdditionalKeywords
@@ -552,7 +552,7 @@
 			this.textBoxKeywordAdditional.Multiline = true;
 			this.textBoxKeywordAdditional.Name = "textBoxKeywordAdditional";
 			this.textBoxKeywordAdditional.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(299, 266);
+			this.textBoxKeywordAdditional.Size = new System.Drawing.Size(299, 268);
 			this.textBoxKeywordAdditional.TabIndex = 1;
 			// 
 			// groupBoxManagementByDate

@@ -29,6 +29,7 @@
 		private void InitializeComponent ()
 		{
 			this.groupBoxOutline = new System.Windows.Forms.GroupBox();
+			this.checkBoxOnlyFromWebBrowser = new System.Windows.Forms.CheckBox();
 			this.checkBoxFixURL = new System.Windows.Forms.CheckBox();
 			this.checkBoxDateRearrange = new System.Windows.Forms.CheckBox();
 			this.checkBoxLineMerger = new System.Windows.Forms.CheckBox();
@@ -40,14 +41,27 @@
 			// 
 			this.groupBoxOutline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxOutline.Controls.Add(this.checkBoxOnlyFromWebBrowser);
 			this.groupBoxOutline.Controls.Add(this.checkBoxFixURL);
 			this.groupBoxOutline.Controls.Add(this.checkBoxDateRearrange);
 			this.groupBoxOutline.Controls.Add(this.checkBoxLineMerger);
 			this.groupBoxOutline.Location = new System.Drawing.Point(3, 3);
 			this.groupBoxOutline.Name = "groupBoxOutline";
-			this.groupBoxOutline.Size = new System.Drawing.Size(194, 94);
+			this.groupBoxOutline.Size = new System.Drawing.Size(194, 115);
 			this.groupBoxOutline.TabIndex = 0;
 			this.groupBoxOutline.TabStop = false;
+			// 
+			// checkBoxOnlyFromWebBrowser
+			// 
+			this.checkBoxOnlyFromWebBrowser.AutoSize = true;
+			this.checkBoxOnlyFromWebBrowser.Checked = true;
+			this.checkBoxOnlyFromWebBrowser.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxOnlyFromWebBrowser.Location = new System.Drawing.Point(6, 88);
+			this.checkBoxOnlyFromWebBrowser.Name = "checkBoxOnlyFromWebBrowser";
+			this.checkBoxOnlyFromWebBrowser.Size = new System.Drawing.Size(160, 16);
+			this.checkBoxOnlyFromWebBrowser.TabIndex = 3;
+			this.checkBoxOnlyFromWebBrowser.Text = "웹브라우저에서만 자동화";
+			this.checkBoxOnlyFromWebBrowser.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxFixURL
 			// 
@@ -104,10 +118,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.checkBoxUseAutomation);
 			this.Controls.Add(this.groupBoxOutline);
-			this.MaximumSize = new System.Drawing.Size(200, 124);
-			this.MinimumSize = new System.Drawing.Size(200, 124);
+			this.MaximumSize = new System.Drawing.Size(200, 154);
+			this.MinimumSize = new System.Drawing.Size(200, 154);
 			this.Name = "ClipboardAutomator";
-			this.Size = new System.Drawing.Size(200, 124);
+			this.Size = new System.Drawing.Size(200, 154);
 			this.groupBoxOutline.ResumeLayout(false);
 			this.groupBoxOutline.PerformLayout();
 			this.ResumeLayout(false);
@@ -122,5 +136,6 @@
 		private System.Windows.Forms.CheckBox checkBoxLineMerger;
 		private System.Windows.Forms.CheckBox checkBoxDateRearrange;
 		private System.Windows.Forms.CheckBox checkBoxFixURL;
+		private System.Windows.Forms.CheckBox checkBoxOnlyFromWebBrowser;
 	}
 }

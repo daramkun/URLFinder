@@ -396,7 +396,7 @@ namespace URLFinder
 							{
 								if ( token.IsCancellationRequested )
 									return;
-								Operation.Delete ( pdf );
+								Operation.Delete ( pdf.Replace ( "%", "" ) );
 							}
 							Operation.End ();
 

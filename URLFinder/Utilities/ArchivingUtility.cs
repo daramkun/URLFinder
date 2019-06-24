@@ -21,16 +21,21 @@ namespace URLFinder.Utilities
 				{
 					foreach ( var pdfPath in pdfPaths )
 					{
+						string path = pdfPath;
+
 						if ( token.IsCancellationRequested )
 							break;
 
-						preprocess?.Invoke ( pdfPath );
+						if ( path.Contains ( '%' ) )
+							File.Move ( path, path = path.Replace ( "%", "" ) );
 
-						var entry = archive.CreateEntry ( Path.GetFileName ( pdfPath ), CompressionLevel.Optimal );
+						preprocess?.Invoke ( path );
+
+						var entry = archive.CreateEntry ( Path.GetFileName ( path ), CompressionLevel.Optimal );
 						using ( Stream entryStream = entry.Open () )
 						{
-							string newPdfPath = Path.Combine ( Program.ProgramPath, "PdfTemp", Path.GetFileNameWithoutExtension ( pdfPath ) + "compression.pdf" );
-							Process.Start ( new ProcessStartInfo ( "GhostScript/gswin32c.exe", $"-sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=\"{newPdfPath}\" \"{pdfPath}\"" )
+							string newPdfPath = Path.Combine ( Program.ProgramPath, "PdfTemp", Path.GetFileNameWithoutExtension ( path ) + "compression.pdf" );
+							Process.Start ( new ProcessStartInfo ( "GhostScript/gswin32c.exe", $"-sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=\"{newPdfPath}\" \"{path}\"" )
 							{
 								UseShellExecute = false,
 								CreateNoWindow = true,
@@ -44,7 +49,7 @@ namespace URLFinder.Utilities
 							File.Delete ( newPdfPath );
 						}
 
-						proceed?.Invoke ( pdfPath );
+						proceed?.Invoke ( path );
 					}
 				}
 			}
