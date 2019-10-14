@@ -83,6 +83,7 @@
     <Compile Include="Processors\NaverKINProcessor.cs" />
     <Compile Include="Processors\ProcessorFinder.cs" />
     <Compile Include="Processors\RuliwebProcessor.cs" />
+    <Compile Include="Processors\SlrClubProcessor.cs" />
     <Compile Include="Processors\TistoryProcessor.cs" />
     <Compile Include="Processors\TodayHumorProcessor.cs" />
     <Compile Include="Processors\XpressEngineBaseProcessor.cs" />
