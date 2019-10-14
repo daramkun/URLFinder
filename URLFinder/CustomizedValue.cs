@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace URLFinder
 {
@@ -43,7 +44,9 @@ namespace URLFinder
 			}
 			else
 			{
-				new NameEditWindow ().ShowDialog ();
+				if ( new NameEditWindow ().ShowDialog () == System.Windows.Forms.DialogResult.Cancel )
+					Application.Exit ();
+				Save ();
 			}
 		}
 
