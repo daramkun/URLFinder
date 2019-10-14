@@ -71,6 +71,12 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="NameEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameEditWindow.Designer.cs">
+      <DependentUpon>NameEditWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Processors\BaseProcessor.cs" />
     <Compile Include="Processors\DaumCafeProcessor.cs" />
     <Compile Include="Processors\DaumTipProcessor.cs" />
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameEditWindow.resx">
+      <DependentUpon>NameEditWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

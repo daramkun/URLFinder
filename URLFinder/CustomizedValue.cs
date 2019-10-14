@@ -41,6 +41,10 @@ namespace URLFinder
 					AdditiveKeyword = Encoding.UTF8.GetString ( Convert.FromBase64String ( lines [ 8 ] ) );
 				}
 			}
+			else
+			{
+				new NameEditWindow ().ShowDialog ();
+			}
 		}
 
 		public static void Save ()

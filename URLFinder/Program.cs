@@ -16,7 +16,7 @@ namespace URLFinder
 		public static string ProgramPath => Path.GetDirectoryName ( ProgramFilename );
 		public static bool ProcessRunning { get; private set; }
 
-		[ STAThread]
+		[STAThread]
 		static void Main ( string [] args )
 		{
 			ProcessRunning = true;
